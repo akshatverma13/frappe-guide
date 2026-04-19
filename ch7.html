@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Form & Module Reference · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sync, Roles & Config · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,109 +24,143 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 7</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
-      <div class="hero-pill">📋 Chapter 7 of 7 · SNF Project</div>
-      <h1>Form &amp; Module <span>Reference</span></h1>
-      <p>The SNF project catalog. All 76 DocTypes, module map, geography hierarchy, and the dependency order you must follow.</p>
-      <div class="hero-tags"><span class="hero-tag">SNF Project</span><span class="hero-tag">76 DocTypes</span><span class="hero-tag">Module Map</span><span class="hero-tag">Geography</span></div>
-    </div>
-    <div class="callout info"><span class="callout-icon">ℹ️</span><div class="callout-body"><strong>Project-specific chapter</strong><p>Chapters 1–6 explain the platform in general. This chapter catalogs the actual forms and modules in the SNF (Shiksha Navnirmiti Foundation) project.</p></div></div>
-
-    <div class="stats">
-      <div class="stat"><div class="stat-v">76</div><div class="stat-l">Total DocTypes</div></div>
-      <div class="stat"><div class="stat-v">30+</div><div class="stat-l">Option Masters</div></div>
-      <div class="stat"><div class="stat-v">6</div><div class="stat-l">Geography Levels</div></div>
-      <div class="stat"><div class="stat-v">23</div><div class="stat-l">Child Tables in Elementary DVR</div></div>
+      <div class="hero-pill">🔐 Chapter 7 of 7</div>
+      <h1>Sync, Roles <em>&amp; Config</em></h1>
+      <p>Deep dive into all three sync types, the complete Frappe permission system, roles, user management, fixtures, and system configuration.</p>
+      <div class="hero-tags"><span class="hero-tag">Push / Pull / Schema Sync</span><span class="hero-tag">Delta Sync</span><span class="hero-tag">Roles</span><span class="hero-tag">Permissions</span><span class="hero-tag">Fixtures</span></div>
     </div>
 
-    <h2>The Three Programs</h2>
-    <div class="cards three">
-      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">📚</div><div class="card-title">Shiksha Plus</div></div><p>Community learning centers. Volunteer-led education. 6 main forms + 8 child tables.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-teal">🏫</div><div class="card-title">Shiksha Kiran</div></div><p>School-based education support and monitoring. 3 forms + 4 child tables.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-green">📝</div><div class="card-title">Shiksha Elementary</div></div><p>Elementary school monitoring with detailed checklists. 4 forms + 23 child tables.</p></div>
-    </div>
-
-    <h2>Module Map</h2>
-    <div class="tbl"><table>
-      <thead><tr><th>Module</th><th>Contents</th><th>Purpose</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge ba-indigo">Geo Master</span></td><td>6 DocTypes</td><td>State, District, Block, Gram Panchayat, Village, Hamlet</td></tr>
-        <tr><td><span class="badge ba-gray">Answer Options</span></td><td>30+ DocTypes</td><td>All dropdown option masters used across all forms</td></tr>
-        <tr><td><span class="badge ba-teal">SNF Core</span></td><td>4 forms</td><td>Employee Master, Household Survey, Assessment, BME</td></tr>
-        <tr><td><span class="badge ba-green">Shiksha Plus</span></td><td>6 forms + 8 child tables</td><td>Volunteer, DVR, MIS, Attendance, Enrolment</td></tr>
-        <tr><td><span class="badge ba-amber">Shiksha Kiran</span></td><td>3 forms + 4 child tables</td><td>DVR, MIS, Baseline Evaluation</td></tr>
-        <tr><td><span class="badge ba-red">Shiksha Elementary</span></td><td>4 forms + 23 child tables</td><td>DVR, Student Attendance, Headcount, Student Profiling</td></tr>
-      </tbody>
-    </table></div>
-
-    <h2>Geography Hierarchy</h2>
-    <p>The foundation of all data collection. Every form starts with geography. Each level references its parent, and selecting one level automatically narrows the next.</p>
-    <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:14px 0;box-shadow:var(--sh)">
-      <div style="background:#F8FAFF;border-bottom:1px solid var(--border);padding:10px 16px 10px 20px;font-size:13px;font-weight:600;color:#3730A3;display:flex;align-items:center;gap:10px">🌍 State <span style="color:var(--light);font-weight:400;font-size:12px">e.g., Maharashtra</span></div>
-      <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px 10px 36px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">📍 District <span style="color:var(--light);font-weight:400;font-size:12px">e.g., Pune</span></div>
-      <div style="background:var(--teal-light);border-bottom:1px solid var(--border);padding:10px 16px 10px 52px;font-size:13px;font-weight:500;color:#0F766E;display:flex;align-items:center;gap:10px">🏘️ Block <span style="color:#99F6E4;font-weight:400;font-size:12px">e.g., Haveli</span></div>
-      <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px 10px 68px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">🏛️ Gram Panchayat</div>
-      <div style="background:var(--green-light);border-bottom:1px solid var(--border);padding:10px 16px 10px 84px;font-size:13px;font-weight:500;color:#065F46;display:flex;align-items:center;gap:10px">🌳 Village</div>
-      <div style="background:var(--bg);padding:10px 16px 10px 100px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">🏠 Hamlet <span style="color:var(--light);font-weight:400;font-size:12px">Also serves as batch identifier for learner grouping</span></div>
-    </div>
-
-    <h2>Dependency Order — What to Create First</h2>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div class="callout-body"><strong>Always follow this sequence</strong><p>For initial system setup, data imports, testing, and mobile sync. Transaction forms reference master data — they will fail if the referenced record doesn't exist yet.</p></div></div>
-    <div class="tbl"><table>
-      <thead><tr><th>Level</th><th>Contains</th><th>Create When</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge ba-indigo">Level 0</span></td><td>All 6 Geography DocTypes + 30+ Option Masters</td><td>First — no dependencies on anything</td></tr>
-        <tr><td><span class="badge ba-teal">Level 1</span></td><td>Employee Master, Household Survey, Volunteers, Enrolment</td><td>After Level 0 is complete</td></tr>
-        <tr><td><span class="badge ba-green">Level 2</span></td><td>All DVRs, MIS forms, Attendance, Headcount, Student Profiling</td><td>After Level 1 is complete</td></tr>
-        <tr><td><span class="badge ba-amber">Level 3</span></td><td>Assessment Form, Baseline-Midline-Endline</td><td>After Level 2 is complete</td></tr>
-      </tbody>
-    </table></div>
-
-    <h2>Form Complexity Ranking</h2>
-    <div class="tbl"><table>
-      <thead><tr><th>Complexity</th><th>Form</th><th>Reason</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge ba-green">Simplest</span></td><td>Option Masters</td><td>Just a name field — dropdown choice records</td></tr>
-        <tr><td><span class="badge ba-green">Simple</span></td><td>Geography Masters</td><td>Name + parent reference link</td></tr>
-        <tr><td><span class="badge ba-teal">Moderate</span></td><td>Employee Master, Volunteer</td><td>Flat form with geography links and auto-fill</td></tr>
-        <tr><td><span class="badge ba-amber">Complex</span></td><td>Household Survey</td><td>Child table + computed case category calculations</td></tr>
-        <tr><td><span class="badge ba-red">Very Complex</span></td><td>Shiksha Plus DVR</td><td>Branching form — 4 different section sets, 6 child tables</td></tr>
-        <tr><td><span class="badge ba-red">Most Complex</span></td><td>Shiksha Elementary DVR</td><td>23 child tables, extensive conditional logic</td></tr>
-      </tbody>
-    </table></div>
-
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 7</h3>
-      <div class="quiz-q"><p>You are setting up the SNF system from scratch. What must you create first?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>DVRs first — they are the most used forms</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Geography masters and option masters first, then employees, then DVRs</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Alphabetical order — it does not matter</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. Level 0 (geography + options) → Level 1 (employees) → Level 2 (DVRs) → Level 3 (assessments).</div>
-        <div class="quiz-fb bad">✗ Always follow dependency order: geography + options first, then people masters, then transaction forms.</div>
+    <h2>The Three Sync Types</h2>
+    <div class="sync-visual">
+      <div class="sync-box"><div class="sbi">📱</div><div class="sbn">Mobile App</div><div class="sbs">Flutter · SQLite</div></div>
+      <div class="sync-arrows">
+        <div class="sa"><div class="sa-arrow-up">↑</div><div class="sa-line up"></div><div class="sa-label" style="color:var(--accent)">PUSH</div></div>
+        <div class="sa" style="margin-top:4px"><div class="sa-label" style="color:var(--accent-2)">PULL</div><div class="sa-line dn"></div><div class="sa-arrow-dn">↓</div></div>
+        <div class="sa" style="margin-top:4px"><div class="sa-label" style="color:var(--purple)">SCHEMA</div><div class="sa-line" style="background:var(--purple);height:24px;width:2px"></div><div style="font-size:12px;color:var(--purple)">↙</div></div>
       </div>
+      <div class="sync-box"><div class="sbi">🧠</div><div class="sbn">Frappe Server</div><div class="sbs">Python · MariaDB</div></div>
     </div>
 
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:36px;text-align:center;margin-top:40px;box-shadow:var(--sh)">
-      <div style="font-size:32px;margin-bottom:12px">✦</div>
-      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:8px">All 7 chapters complete.</div>
-      <div style="color:var(--muted);margin-bottom:24px;font-size:14px;max-width:400px;margin-left:auto;margin-right:auto">You now understand the full Frappe platform — from DocTypes and sync to the complete SNF module structure.</div>
-      <a href="index.html" style="background:var(--indigo);color:white;padding:10px 24px;border-radius:var(--r-sm);text-decoration:none;font-weight:500;font-size:13.5px;display:inline-block">← Back to Overview</a>
-    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Type</th><th>Direction</th><th>What Travels</th><th>Triggered By</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-a">Schema Sync</span></td><td>Server → App</td><td>DocType definitions (fields, conditions, layout, naming rules)</td><td>App startup; when server detects newer definition</td></tr>
+        <tr><td><span class="badge ba-t">Push Sync</span></td><td>App → Server</td><td>Dirty records (new, modified, deleted)</td><td>After every save; app startup; manual sync button</td></tr>
+        <tr><td><span class="badge ba-g">Pull Sync</span></td><td>Server → App</td><td>Other users' records, Desk edits, new master data</td><td>App startup; after push completes; manual</td></tr>
+      </tbody>
+    </table></div>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch6.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Data Flow & Sync</div></div></a>
-      <a href="glossary.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Glossary</div></div></a>
+    <h2>Push Sync — Dependency Ordering</h2>
+    <p>Records don't upload randomly — they follow a strict dependency sequence to ensure all referenced records exist on the server before forms that link to them:</p>
+    <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:14px 0;box-shadow:var(--sh)">
+      <div style="background:var(--accent);color:white;padding:10px 20px;display:flex;align-items:center;gap:12px"><div style="width:24px;height:24px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px">0</div><div><div style="font-size:12.5px;font-weight:600">Geography Masters</div><div style="font-size:11px;opacity:.8">State, District, Block, Gram Panchayat, Village, Hamlet · No dependencies</div></div></div>
+      <div style="background:var(--teal-bg);border-top:1px solid var(--border);color:var(--teal);padding:10px 20px 10px 32px;display:flex;align-items:center;gap:12px"><div style="width:24px;height:24px;background:var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:white">1</div><div><div style="font-size:12.5px;font-weight:600">People Masters</div><div style="font-size:11px;opacity:.8">Employees, Volunteers, Households · Depend on Level 0</div></div></div>
+      <div style="background:var(--purple-bg);border-top:1px solid var(--border);color:var(--purple);padding:10px 20px 10px 44px;display:flex;align-items:center;gap:12px"><div style="width:24px;height:24px;background:var(--purple);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:white">2</div><div><div style="font-size:12.5px;font-weight:600">Transaction Forms</div><div style="font-size:11px;opacity:.8">DVRs, Attendance, Surveys, MIS · Depend on Levels 0 + 1</div></div></div>
+      <div style="background:var(--green-bg);border-top:1px solid var(--border);color:var(--green);padding:10px 20px 10px 56px;display:flex;align-items:center;gap:12px"><div style="width:24px;height:24px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;color:white">3</div><div><div style="font-size:12.5px;font-weight:600">Referencing Transactions</div><div style="font-size:11px;opacity:.8">Assessments, BME · Depend on Levels 0 + 1 + 2</div></div></div>
     </div>
+    <div class="callout warn"><span class="callout-ico">⚠️</span><div class="callout-body"><strong>Why ordering matters</strong><p>A Visit Report links to a Volunteer. If the Volunteer hasn't uploaded yet, the server rejects the Visit Report with a "linked record does not exist" error. Ordering prevents this entirely.</p></div></div>
+
+    <h2>Delta Sync — Efficient Data Download</h2>
+    <p>Pull Sync uses a "delta" approach — the app only requests records that have changed since its last sync:</p>
+    <div class="code-block"><span class="cm">// App sends this query on Pull Sync:</span>
+GET /api/resource/Household Survey
+  ?filters=[["modified", ">", "2024-04-10 14:30:00"]]
+  &fields=["name","modified","village","head_of_household",...]
+
+<span class="cm">// Server returns ONLY records modified since that timestamp
+// Not the entire database — just the delta</span></div>
+    <div class="callout tip"><span class="callout-ico">✅</span><div class="callout-body"><strong>Result</strong><p>Even with 50,000 records in the system, if only 12 changed since last sync, only 12 come down. Syncs are fast even on slow mobile data connections.</p></div></div>
+
+    <h2>Frappe Permission System</h2>
+    <p>Frappe uses <strong>role-based access control</strong>. Every user has one or more Roles. Each DocType defines what each Role can do:</p>
+    <div class="perm-grid">
+      <div class="perm-cell hdr row-hdr">Role</div>
+      <div class="perm-cell hdr">Read</div>
+      <div class="perm-cell hdr">Create</div>
+      <div class="perm-cell hdr">Write</div>
+      <div class="perm-cell hdr">Delete</div>
+      <div class="perm-cell hdr">Submit</div>
+      <div class="perm-cell row-hdr">System Manager</div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell row-hdr">State Coordinator</div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell row-hdr">Field Coordinator</div>
+      <div class="perm-cell"><span class="part">◐</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="part">◐</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell row-hdr">Mobile User</div>
+      <div class="perm-cell"><span class="part">◐</span></div>
+      <div class="perm-cell"><span class="tick">✓</span></div>
+      <div class="perm-cell"><span class="part">◐</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+      <div class="perm-cell"><span class="cross">✗</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--light)">✓ = Yes &nbsp;·&nbsp; ✗ = No &nbsp;·&nbsp; ◐ = Own records only (User Permission)</p>
+
+    <h2>Permission Levels</h2>
+    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">🌐</span><span class="acc-hdr-t">DocType-Level Permissions</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>Controls what a role can do with a DocType: Read, Create, Write, Delete, Submit, Cancel, Amend, Report, Export, Import, Share. Set in the DocType's Permissions table.</p></div></div>
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🔏</span><span class="acc-hdr-t">User Permissions — "Own Records Only"</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>User Permissions restrict a user to only see/edit records where a specific link field matches their value. Example: "Field Coordinator Kavita can only see DVRs where <code>created_by = Kavita</code>." Set in User Permissions DocType.</p></div></div>
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🔒</span><span class="acc-hdr-t">Field-Level Permissions (Permlevel)</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>Each field has a "Permlevel" (0–9). Users need the corresponding permlevel on their role to see/edit that field. Permlevel 0 = everyone. Permlevel 1+ = only roles with that specific permission level. Useful for hiding sensitive fields (salary, phone numbers) from certain roles.</p></div></div>
+
+    <h2>Fixtures — Pre-loaded Data</h2>
+    <p>Fixtures are data records bundled with a Frappe App that are automatically installed (or updated) when the app is installed. They ensure every fresh installation has the same base data:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Fixture Type</th><th>Example</th><th>Why Use Fixtures</th></tr></thead>
+      <tbody>
+        <tr><td>Option Masters</td><td>Education Level records: Illiterate, Primary, Secondary...</td><td>Same options on every installation — no manual data entry</td></tr>
+        <tr><td>Geography Data</td><td>States, Districts, Blocks (seed data)</td><td>Pre-populate geography without manual imports</td></tr>
+        <tr><td>Role Profiles</td><td>Mobile User, Field Coordinator, State Coordinator</td><td>Consistent roles across environments (dev, staging, prod)</td></tr>
+        <tr><td>Custom Fields</td><td>Extra fields added to standard DocTypes</td><td>Ensure custom fields are reproduced in every install</td></tr>
+        <tr><td>Notification Rules</td><td>Email alerts on DVR submission</td><td>System configuration deployed automatically</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Error Handling in Sync</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Error Scenario</th><th>What Happens</th><th>How to Recover</th></tr></thead>
+      <tbody>
+        <tr><td>No internet for days</td><td>Records accumulate as Dirty. Nothing lost.</td><td>Auto-batch-upload when internet returns.</td></tr>
+        <tr><td>Server rejects a record</td><td>Record stays Dirty. Error text stored locally.</td><td>User opens record, sees error, fixes, re-saves.</td></tr>
+        <tr><td>Partial sync failure</td><td>Successful records become Clean. Failed stay Dirty.</td><td>Next sync retries only the failed records.</td></tr>
+        <tr><td>Two users edit the same record</td><td>Last-write-wins (by server timestamp).</td><td>Rare in practice — workers cover separate areas.</td></tr>
+        <tr><td>Referenced record missing</td><td>Upload rejected: "linked record does not exist".</td><td>Check dependency ordering — upload the referenced record first.</td></tr>
+        <tr><td>Auth token expired</td><td>App auto-refreshes using refresh token (30-day).</td><td>If refresh token also expired — user re-logs in once.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 5</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 5</div><p>In Push Sync, why are geography masters uploaded before transaction forms like DVRs?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>To save bandwidth by uploading smaller files first</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Because transaction forms reference geography — the reference must exist on server first</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>For alphabetical ordering in the database</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Geography masters have higher priority in the queue</div></div><div class="quiz-fb ok">✓ Correct! A DVR links to a Village. If Village hasn't uploaded yet, the server rejects the DVR. Ordering prevents reference failures.</div><div class="quiz-fb bad">✗ Dependency ordering: referenced records (geography, people) must exist on the server before transaction forms that link to them.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 5</div><p>What is 'Delta Sync' in Frappe's Pull Sync?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Syncing only when the battery is above 50%</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Downloading only records modified since the last sync timestamp — not the full database</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A faster version of sync that skips validation</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Syncing data in alphabetical order (A-Z)</div></div><div class="quiz-fb ok">✓ Correct! Delta means only the difference — records changed since last sync. Efficient even with large datasets.</div><div class="quiz-fb bad">✗ Delta Sync downloads only records with a modification timestamp newer than the last sync. Efficient for large datasets.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 5</div><p>A user has the 'Field Coordinator' role with a User Permission set to their own name. What does this mean?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>They can see all records across all coordinators</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>They can only see records where a specific link field matches their username</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>They have read-only access to all records</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Their account has no login restrictions</div></div><div class="quiz-fb ok">✓ Correct! User Permissions restrict visibility to records where a specific field matches the user's own value.</div><div class="quiz-fb bad">✗ User Permissions implement 'own records only' — the user can only see records that match their identity on a specified link field.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 5</div><p>What are Frappe Fixtures used for?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Temporary test data that is removed after installation</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Pre-loaded data and configuration bundled with a Frappe App — auto-installed on every fresh install</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Database backup files</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Placeholder data shown in forms before the user fills them</div></div><div class="quiz-fb ok">✓ Correct! Fixtures are bundled data (option masters, roles, custom fields) that auto-install with every deployment.</div><div class="quiz-fb bad">✗ Fixtures ensure consistent base data across all environments — no manual data entry needed on each new installation.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 5 of 5</div><p>What does 'Permlevel' (Field-Level Permission) control in Frappe?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The order in which fields are displayed on the form</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Which users can see or edit specific fields based on their role's permission level</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Whether a field is required or optional</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>The database column type for the field</div></div><div class="quiz-fb ok">✓ Correct! Permlevel controls field visibility by role — useful for hiding sensitive fields from certain user roles.</div><div class="quiz-fb bad">✗ Permlevel assigns sensitivity levels (0–9) to fields. Roles need matching permission levels to see/edit those fields.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
+    </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch6.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Mobile App & SDK</div></div></a><a href="glossary.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Glossary</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch7');</script>
-</body>
-</html>
+<script>init('ch7');</script>
+</body></html>
