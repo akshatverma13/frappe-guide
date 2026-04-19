@@ -1,146 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Mobile App · Frappe Guide</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Mobile App · Frappe Learning Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-
-<button class="mob-toggle" id="mob-toggle">☰</button>
-
-<!-- SIDEBAR -->
+<button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
     <div class="sb-logo-mark">🌿</div>
     <div>
-      <div class="sb-logo-name">Frappe Guide</div>
-      <div class="sb-logo-sub">Dhwani RIS · Product Team</div>
+      <div class="sb-logo-name">Frappe Learning Guide</div>
+      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
     </div>
   </a>
-  <div class="sb-scroll" id="sb-nav"><!-- built by JS --></div>
+  <div class="sb-scroll" id="sb-nav"></div>
   <div class="sb-footer">
-    <div class="sb-progress-label">
-      <span>Progress</span>
-      <span id="sb-prog-done">0 / 7</span>
+    <div class="sb-prog-row">
+      <span class="sb-prog-label">Your Progress</span>
+      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
     </div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-built">Built by Nihaan Mohammed · 2026</div>
+    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
   </div>
 </aside>
-
-<!-- MAIN -->
 <main class="main">
   <div class="topbar">
-    <span class="topbar-crumb">
-      <a href="index.html">Frappe Guide</a>
-      <span class="topbar-sep"> › </span>
-    </span>
-    <span class="topbar-current">Chapter 5 · The Mobile App</span>
-    <div class="topbar-right">
-      <span class="topbar-progress" id="top-prog">0 / 7 chapters</span>
+    <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
+    <span class="tb-cur">Chapter 5</span>
+    <div class="tb-right">
+      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
     </div>
   </div>
-
-  <div class="page-wrap">
+  <div class="page">
 
     <div class="hero">
-      <div class="hero-eyebrow">📱 Chapter 5 of 7</div>
-      <h1>The Mobile<br><em>App</em></h1>
-      <p>Field worker experience. How offline truly works. Dirty vs clean records. The SDK engine that renders everything dynamically.</p>
-      <div class="hero-tags"><span class="hero-tag">Offline</span><span class="hero-tag">SDK</span><span class="hero-tag">Dirty Records</span><span class="hero-tag">Flutter</span></div>
+      <div class="hero-pill">📱 Chapter 5 of 7</div>
+      <h1>The Mobile <span>App</span></h1>
+      <p>Field worker experience. How offline truly works. Dirty vs clean records. The SDK engine that renders every form dynamically.</p>
+      <div class="hero-tags"><span class="hero-tag">Offline</span><span class="hero-tag">SDK Engine</span><span class="hero-tag">Record Status</span><span class="hero-tag">Flutter</span></div>
     </div>
+    <div class="callout key"><span class="callout-icon">🔑</span><div class="callout-body"><strong>True Offline Capability</strong><p>Fill forms and save with zero internet. Data stores locally on the device and syncs to the server when connectivity returns. No data loss. No time limit.</p></div></div>
 
-    <div class="callout key"><span class="callout-icon">🔑</span><div><strong>The Superpower — True Offline</strong><p>Fill forms and save with zero internet. Data stores locally on the device and syncs to the server whenever connectivity returns. No data loss. No time limit. Indefinitely.</p></div></div>
-
-    <h2>App Architecture — Thin Shell, Fat SDK</h2>
+    <h2>App Architecture</h2>
     <div class="cards">
-      <div class="card"><div class="card-head"><div class="card-ico ci-blue">🏠</div><div class="card-title">App Shell</div></div><p>Lightweight. Provides branding, project config, and client-specific Dart form handlers. Different per client project.</p></div>
+      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">🏠</div><div class="card-title">App Shell</div></div><p>Lightweight outer layer. Provides branding, project config, and client-specific form handlers. Different per project.</p></div>
       <div class="card"><div class="card-head"><div class="card-ico ci-purple">⚙️</div><div class="card-title">SDK Engine</div></div><p>The heavy lifter: reads DocType definitions, renders forms as native screens, stores data locally (SQLite), syncs with server, manages auth tokens. Shared across all projects.</p></div>
     </div>
-    <div class="callout info"><span class="callout-icon">💡</span><div><strong>No form is hardcoded</strong><p>Every form is built dynamically at runtime from the server's DocType definition. Form changes on the server update the app automatically on next sync.</p></div></div>
+    <div class="callout info"><span class="callout-icon">💡</span><div class="callout-body"><strong>No form is hardcoded in the app</strong><p>Every form is built dynamically from the server's DocType definition. Form changes on the server update the app automatically on next sync.</p></div></div>
 
-    <h2>Login — What Happens</h2>
+    <h2>Login — Step by Step</h2>
     <div class="flow">
-      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">1</div><div class="flow-connector"></div></div><div class="flow-content"><h4>App checks if mobile service is enabled</h4><p>Quick server check, no credentials needed. If disabled, stops here.</p></div></div>
-      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">2</div><div class="flow-connector"></div></div><div class="flow-content"><h4>User enters credentials</h4><p>Username/password or mobile + OTP. On success: receives auth tokens (30-day validity), enabled forms list, permissions, language preference.</p></div></div>
-      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">3</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Initial sync</h4><p>Downloads all form definitions, existing records, and translations.</p></div></div>
-      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">4</div><div class="flow-connector"></div></div><div class="flow-content"><h4>App is ready — internet can be turned off</h4><p>Everything for offline work is now stored locally. The user is fully self-sufficient.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>App checks if mobile service is enabled</h4><p>Quick server check, no credentials needed. Shows message and stops if disabled.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>User enters credentials</h4><p>Username/password or mobile + OTP. On success: auth tokens (30-day validity), enabled forms list, permissions, language preference.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>Initial sync downloads everything needed</h4><p>All form definitions, existing records, and translations for the user's language.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>App is ready — internet can be switched off</h4><p>All data for offline work is stored locally. The user is fully self-sufficient.</p></div></div>
     </div>
 
     <h2>Record Status</h2>
-    <div class="tbl">
-      <table>
-        <thead><tr><th>Status</th><th>Meaning</th><th>What Happens</th></tr></thead>
-        <tbody>
-          <tr><td><span class="badge ba-green">Clean</span></td><td>In sync with server. No local changes.</td><td>Nothing — it is up to date.</td></tr>
-          <tr><td><span class="badge ba-amber">Dirty</span></td><td>Has local changes not yet uploaded.</td><td>Uploads on next sync.</td></tr>
-          <tr><td><span class="badge ba-red">Error</span></td><td>Server rejected it during sync.</td><td>User sees error, fixes, re-saves.</td></tr>
-          <tr><td><span class="badge ba-gray">Deleted</span></td><td>Marked for deletion locally.</td><td>Delete sent to server on next sync.</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Status</th><th>Meaning</th><th>What Happens Next</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-green">Clean</span></td><td>Fully in sync with the server</td><td>Nothing — it is up to date</td></tr>
+        <tr><td><span class="badge ba-amber">Dirty</span></td><td>Has local changes not yet uploaded</td><td>Uploads on next sync automatically</td></tr>
+        <tr><td><span class="badge ba-red">Error</span></td><td>Server rejected it during sync</td><td>User sees error, fixes it, re-saves</td></tr>
+        <tr><td><span class="badge ba-gray">Deleted</span></td><td>Marked for deletion locally</td><td>Delete request sent on next sync</td></tr>
+      </tbody>
+    </table></div>
 
     <h2>Online vs Offline Save</h2>
-    <div class="tabs">
-      <div class="tab-btns">
-        <button class="tab-btn active">Saving Online</button>
-        <button class="tab-btn">Saving Offline</button>
-        <button class="tab-btn">Sync Failure</button>
-      </div>
-      <div class="tab-pane active">
-        <ol style="line-height:2.2;font-size:13.5px">
-          <li>Data sent to server immediately</li>
-          <li>Server runs all Python validation scripts</li>
-          <li>If passes → server assigns permanent ID, record becomes <span class="badge ba-green">Clean</span></li>
-          <li>If fails → error shown to user, record not saved anywhere</li>
-        </ol>
-      </div>
-      <div class="tab-pane">
-        <ol style="line-height:2.2;font-size:13.5px">
-          <li>Data saved to local SQLite database on the phone</li>
-          <li>App assigns a temporary local ID</li>
-          <li>Record marked <span class="badge ba-amber">Dirty</span> — needs to upload</li>
-          <li>Only mobile-side validation runs (server checks pending)</li>
-          <li>Auto-uploads when internet returns</li>
-        </ol>
-        <div class="callout tip" style="margin-top:12px"><span class="callout-icon">✅</span><div><strong>User experience</strong><p>The Save button works identically online or offline. Users never need to check connectivity.</p></div></div>
-      </div>
-      <div class="tab-pane">
-        <ol style="line-height:2.2;font-size:13.5px">
-          <li>Record stays <span class="badge ba-amber">Dirty</span> with error details stored locally</li>
-          <li>User sees which record failed and exactly why</li>
-          <li>User opens record, fixes the issue, re-saves</li>
-          <li>Auto-retries on next sync</li>
-          <li>Other records are not blocked — each syncs independently</li>
-        </ol>
-      </div>
+    <div class="tabs"><div class="tab-btns">
+      <button class="tab-btn active">Saving Online</button>
+      <button class="tab-btn">Saving Offline</button>
+      <button class="tab-btn">Sync Failure</button>
     </div>
+    <div class="tab-pane active"><ol style="line-height:2.2;font-size:13.5px">
+      <li>Data sent to server immediately</li>
+      <li>Server runs all Python validation scripts</li>
+      <li>If passes → server assigns permanent ID, record becomes <span class="badge ba-green">Clean</span></li>
+      <li>If fails → error shown to user, nothing saved</li>
+    </ol></div>
+    <div class="tab-pane"><ol style="line-height:2.2;font-size:13.5px">
+      <li>Data saved to local database on the device</li>
+      <li>App assigns a temporary local ID</li>
+      <li>Record marked <span class="badge ba-amber">Dirty</span> — needs to upload</li>
+      <li>Only mobile-side validation runs (server checks pending)</li>
+      <li>Auto-uploads when internet returns</li>
+    </ol>
+    <div class="callout tip" style="margin-top:12px"><span class="callout-icon">✅</span><div class="callout-body"><strong>User experience</strong><p>The Save button works identically online or offline. Users never need to check connectivity.</p></div></div>
+    </div>
+    <div class="tab-pane"><ol style="line-height:2.2;font-size:13.5px">
+      <li>Record stays <span class="badge ba-amber">Dirty</span> with error details stored locally</li>
+      <li>User sees which record failed and exactly why</li>
+      <li>User opens the record, fixes the issue, re-saves</li>
+      <li>Auto-retries on the next sync cycle</li>
+      <li>Other records are not blocked — each syncs independently</li>
+    </ol></div></div>
 
-    <div class="quiz">
-      <h3>🧠 Chapter 5 — Quick Check</h3>
-      <div class="quiz-q">
-        <p>A field worker fills 20 forms in a village with no internet. That evening she gets connectivity. What happens?</p>
+    <div class="quiz"><h3>✦ Knowledge Check — Chapter 5</h3>
+      <div class="quiz-q"><p>A field worker fills 20 forms in a village with no internet. That evening she gets connectivity. What happens?</p>
         <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span> The 20 forms are lost — she should have saved online</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">B</span> She must manually submit each form one by one</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">C</span> All 20 forms automatically upload to the server in batch</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The 20 forms are lost — they should have been saved online</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>She must manually submit each form one by one</div>
+          <div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>All 20 forms automatically upload to the server in batch</div>
         </div>
-        <div class="quiz-fb ok">✅ Correct! All Dirty records sync automatically when internet returns. No manual action needed.</div>
-        <div class="quiz-fb bad">❌ Offline records (marked Dirty) sync automatically in batch when internet returns.</div>
+        <div class="quiz-fb ok">✓ Correct. All Dirty records sync automatically when internet returns. No manual action needed.</div>
+        <div class="quiz-fb bad">✗ Offline records (marked Dirty) sync automatically in batch when internet returns.</div>
       </div>
     </div>
-
 
     <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-
     <div class="page-nav">
-      <a href="ch4.html" class="pnav-btn"><span class="arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">The Web Side</div></div></a>
-      <a href="ch6.html" class="pnav-btn next"><span class="arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Data Flow & Sync</div></div></a>
+      <a href="ch4.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">The Web Side</div></div></a>
+      <a href="ch6.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Data Flow & Sync</div></div></a>
     </div>
   </div>
 </main>
-
 <script src="assets/app.js"></script>
 <script>initPage('ch5');</script>
 </body>
