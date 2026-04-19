@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Glossary · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glossary · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,59 +24,69 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Glossary</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
       <div class="hero-pill">≡ Reference</div>
-      <h1>Glossary</h1>
-      <p>Every term used across the guide, defined in plain English. A quick reference for the entire team.</p>
+      <h1>Full <em>Glossary</em></h1>
+      <p>Every term used throughout this guide. A complete reference for the entire team.</p>
     </div>
-
-    <h2>Core Platform Terms</h2>
+    <h2>Core Framework Terms</h2>
     <div class="glos-grid">
-      <div class="glos-item"><div class="glos-term">DocType</div><div class="glos-def">A form template — the blank structure defining what fields exist, their types, layout, and rules. Not the data itself.</div></div>
-      <div class="glos-item"><div class="glos-term">Document</div><div class="glos-def">A filled-in form — one submission. Every saved entry creates one Document with a unique ID.</div></div>
-      <div class="glos-item"><div class="glos-term">Module</div><div class="glos-def">A folder grouping related DocTypes. e.g., "Shiksha Plus" contains DVR, MIS, Attendance forms.</div></div>
-      <div class="glos-item"><div class="glos-term">Child Table</div><div class="glos-def">A repeating "Add Row" section inside a form. Each row is a mini-form saved with the parent.</div></div>
-      <div class="glos-item"><div class="glos-term">Master Data</div><div class="glos-def">Reference data created once and reused by many forms: geography, employees, option lists.</div></div>
-      <div class="glos-item"><div class="glos-term">Transaction Data</div><div class="glos-def">Field-collected data: visit reports, attendance, assessments. References master data.</div></div>
-      <div class="glos-item"><div class="glos-term">Frappe Desk</div><div class="glos-def">The browser-based back office. Used by admins and coordinators. No installation required.</div></div>
-      <div class="glos-item"><div class="glos-term">Option Master</div><div class="glos-def">A small DocType storing dropdown choices (e.g., Education Level). Add options without touching any form.</div></div>
-      <div class="glos-item"><div class="glos-term">Fixtures</div><div class="glos-def">Pre-loaded reference data — all 30+ option masters installed automatically with the system.</div></div>
-      <div class="glos-item"><div class="glos-term">Mobile Configuration</div><div class="glos-def">Admin screen controlling which forms appear on the mobile app and in what category groupings.</div></div>
+      <div class="glos-item"><div class="glos-term">Frappe</div><div class="glos-def">An open-source, meta-driven web application framework built on Python. Generates database tables, web forms, and REST APIs from DocType definitions.</div></div>
+      <div class="glos-item"><div class="glos-term">DocType</div><div class="glos-def">A form template / data model. Defines fields, layout, permissions, naming rules, and behavior. The central building block of Frappe.</div></div>
+      <div class="glos-item"><div class="glos-term">Document</div><div class="glos-def">One filled-in record — a single instance of a DocType. "Household Survey HH-00001" is a Document.</div></div>
+      <div class="glos-item"><div class="glos-term">Module</div><div class="glos-def">A logical grouping of related DocTypes. Appears as a folder in the Frappe Desk sidebar.</div></div>
+      <div class="glos-item"><div class="glos-term">Frappe App</div><div class="glos-def">A Python package that extends Frappe with new DocTypes, scripts, and configurations. All customizations should live in a Frappe App.</div></div>
+      <div class="glos-item"><div class="glos-term">Frappe Desk</div><div class="glos-def">The browser-based back office UI that comes with every Frappe installation. No installation required — works in any browser.</div></div>
+      <div class="glos-item"><div class="glos-term">Bench</div><div class="glos-def">The CLI tool and directory structure for managing Frappe installations. Used to create sites, install apps, run migrations, and update.</div></div>
+      <div class="glos-item"><div class="glos-term">Site</div><div class="glos-def">A single Frappe deployment — one URL, one MariaDB database, one set of users and data. Managed by Bench.</div></div>
+      <div class="glos-item"><div class="glos-term">Fixtures</div><div class="glos-def">Pre-loaded data bundled with a Frappe App. Auto-installed on every fresh deployment — ensures consistent base data.</div></div>
+      <div class="glos-item"><div class="glos-term">Hooks</div><div class="glos-def">Event bindings in hooks.py that attach Python functions to Frappe events (before_save, on_submit, etc.) without modifying core code.</div></div>
     </div>
-
-    <h2>Field & Form Terms</h2>
+    <h2>Form & Field Terms</h2>
     <div class="glos-grid">
-      <div class="glos-item"><div class="glos-term">Depends On</div><div class="glos-def">A condition expression on a field controlling when it shows or hides. Self-contained on each field.</div></div>
-      <div class="glos-item"><div class="glos-term">Link Field</div><div class="glos-def">A dropdown pulling choices from another DocType. e.g., State dropdown from the State master.</div></div>
-      <div class="glos-item"><div class="glos-term">Fetch From</div><div class="glos-def">An auto-fill rule — when a linked record is selected, copies a value from that record into this field.</div></div>
-      <div class="glos-item"><div class="glos-term">Server Script</div><div class="glos-def">Python code validating data on the server every time a form is saved. The safety net for all rules.</div></div>
-      <div class="glos-item"><div class="glos-term">Mobile Handler</div><div class="glos-def">Dart code in the app for real-time field calculations and on-validate checks on the mobile side.</div></div>
-      <div class="glos-item"><div class="glos-term">Client Script</div><div class="glos-def">JavaScript on Frappe Desk providing real-time behaviour on the web interface only.</div></div>
+      <div class="glos-item"><div class="glos-term">depends_on</div><div class="glos-def">A condition expression on a field controlling when it shows or hides. Self-contained on each field. Same on web and mobile.</div></div>
+      <div class="glos-item"><div class="glos-term">Link Field</div><div class="glos-def">A dropdown that pulls choices from another DocType. Enforces referential integrity — the linked record must exist.</div></div>
+      <div class="glos-item"><div class="glos-term">fetch_from</div><div class="glos-def">An auto-fill property. When a linked record is selected, copies a specified value from that record into the current field.</div></div>
+      <div class="glos-item"><div class="glos-term">Link Filter</div><div class="glos-def">A filter applied to a Link field's dropdown based on another field's value. Used for cascading dropdowns (State → District).</div></div>
+      <div class="glos-item"><div class="glos-term">Child Table</div><div class="glos-def">A DocType marked as a child — a repeating list inside a parent form. Cannot exist independently, has no List View.</div></div>
+      <div class="glos-item"><div class="glos-term">Option Master</div><div class="glos-def">A small DocType that stores dropdown choices. Link fields point to it. Adding new options requires no form editing.</div></div>
+      <div class="glos-item"><div class="glos-term">mandatory_depends_on</div><div class="glos-def">Makes a field required only when a condition is met. Must also be enforced by a Server Script on the server side.</div></div>
+      <div class="glos-item"><div class="glos-term">Permlevel</div><div class="glos-def">A 0–9 number on each field. Roles need the matching permission level to see or edit that field. Used for field-level access control.</div></div>
     </div>
-
-    <h2>Sync Terms</h2>
+    <h2>Mobile & Sync Terms</h2>
     <div class="glos-grid">
-      <div class="glos-item"><div class="glos-term">Schema Sync</div><div class="glos-def">App downloads updated form definitions from the server. Triggered by any form change. Automatic.</div></div>
-      <div class="glos-item"><div class="glos-term">Push Sync</div><div class="glos-def">App uploads filled records to the server. Follows dependency ordering (geography first).</div></div>
-      <div class="glos-item"><div class="glos-term">Pull Sync</div><div class="glos-def">App downloads records from server — other users' data, Desk edits, new master data.</div></div>
-      <div class="glos-item"><div class="glos-term">Delta Sync</div><div class="glos-def">Only records modified since the last sync are downloaded. Not the full database every time.</div></div>
-      <div class="glos-item"><div class="glos-term">Dirty Record</div><div class="glos-def">A locally saved record with unsynchronised changes. Uploads automatically on next sync.</div></div>
-      <div class="glos-item"><div class="glos-term">Clean Record</div><div class="glos-def">A record fully in sync with the server. No pending local changes.</div></div>
+      <div class="glos-item"><div class="glos-term">Mobile SDK</div><div class="glos-def">The reusable Flutter/Dart engine that handles form rendering, offline storage, sync, and auth. Shared across all mobile projects.</div></div>
+      <div class="glos-item"><div class="glos-term">Dart Form Handler</div><div class="glos-def">A Dart class providing on_field_change and on_validate behavior on mobile. The mobile equivalent of a Frappe Client Script.</div></div>
+      <div class="glos-item"><div class="glos-term">Mobile Controller</div><div class="glos-def">The pattern of using Dart Form Handlers to attach project-specific logic to the SDK's form rendering engine.</div></div>
+      <div class="glos-item"><div class="glos-term">Schema Sync</div><div class="glos-def">Downloads updated DocType definitions from server to app. Triggered by form changes. No app store update needed.</div></div>
+      <div class="glos-item"><div class="glos-term">Push Sync</div><div class="glos-def">Uploads Dirty records (new, modified, deleted) from app to server. Follows dependency ordering.</div></div>
+      <div class="glos-item"><div class="glos-term">Pull Sync</div><div class="glos-def">Downloads records from server to app — other users' data, Desk edits, new master data. Uses delta approach.</div></div>
+      <div class="glos-item"><div class="glos-term">Delta Sync</div><div class="glos-def">Only downloading records modified since the last sync timestamp. Efficient even with large datasets.</div></div>
+      <div class="glos-item"><div class="glos-term">Dirty Record</div><div class="glos-def">A locally saved record with unsynchronised changes. Automatically uploaded on next sync cycle.</div></div>
+      <div class="glos-item"><div class="glos-term">Clean Record</div><div class="glos-def">A record fully synchronized with the server. No pending local changes.</div></div>
+      <div class="glos-item"><div class="glos-term">Offline-First</div><div class="glos-def">Design principle: the app works fully without internet. Data saved locally, synced when connected. No data loss.</div></div>
+    </div>
+    <h2>Script & Permission Terms</h2>
+    <div class="glos-grid">
+      <div class="glos-item"><div class="glos-term">Server Script</div><div class="glos-def">Python code that runs on the server on every document event. The authoritative validation and calculation layer.</div></div>
+      <div class="glos-item"><div class="glos-term">Client Script</div><div class="glos-def">JavaScript code that runs in the browser (Frappe Desk only). Provides real-time interactive behavior on the web.</div></div>
+      <div class="glos-item"><div class="glos-term">Role</div><div class="glos-def">A named permission bundle (e.g., "Field Coordinator"). Users are assigned roles. Roles define what they can do with each DocType.</div></div>
+      <div class="glos-item"><div class="glos-term">User Permission</div><div class="glos-def">Restricts a user to only see/edit records where a specific link field matches their identity. Implements "own records only".</div></div>
+      <div class="glos-item"><div class="glos-term">Workflow</div><div class="glos-def">A state machine for a DocType — defines states (Draft/Submitted/Approved) and which roles can trigger transitions between them.</div></div>
+      <div class="glos-item"><div class="glos-term">Amendment</div><div class="glos-def">Creating a new editable version of an approved/submitted record, while preserving the original for audit trail purposes.</div></div>
     </div>
 
     
-    <div class="page-nav">
-      <a href="ch7.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Form & Module Reference</div></div></a>
-      <span></span>
-    </div>
+    <div class="page-nav"><a href="ch7.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Sync, Roles & Config</div></div></a><span></span></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('glos');</script>
-</body>
-</html>
+<script>init('glos');</script>
+</body></html>
