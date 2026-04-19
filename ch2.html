@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How Forms Are Built · Frappe Guide</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<button class="mob-toggle" id="mob-toggle">☰</button>
+
+<!-- SIDEBAR -->
+<aside class="sb" id="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">🌿</div>
+    <div>
+      <div class="sb-logo-name">Frappe Guide</div>
+      <div class="sb-logo-sub">Dhwani RIS · Product Team</div>
+    </div>
+  </a>
+  <div class="sb-scroll" id="sb-nav"><!-- built by JS --></div>
+  <div class="sb-footer">
+    <div class="sb-progress-label">
+      <span>Progress</span>
+      <span id="sb-prog-done">0 / 7</span>
+    </div>
+    <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
+    <div class="sb-built">Built by Nihaan Mohammed · 2026</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-crumb">
+      <a href="index.html">Frappe Guide</a>
+      <span class="topbar-sep"> › </span>
+    </span>
+    <span class="topbar-current">Chapter 2 · How Forms Are Built</span>
+    <div class="topbar-right">
+      <span class="topbar-progress" id="top-prog">0 / 7 chapters</span>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+
+    <div class="hero">
+      <div class="hero-eyebrow">🧱 Chapter 2 of 7</div>
+      <h1>How Forms<br>Are <em>Built</em></h1>
+      <p>Field types, child tables, cascading dropdowns, conditional visibility, and the three script layers. The full picture.</p>
+      <div class="hero-tags"><span class="hero-tag">Field Types</span><span class="hero-tag">Child Tables</span><span class="hero-tag">Conditions</span><span class="hero-tag">Scripts</span></div>
+    </div>
+
+    <h2>Field Types — Complete Reference</h2>
+    <div class="tabs">
+      <div class="tab-btns">
+        <button class="tab-btn active">Text & Numbers</button>
+        <button class="tab-btn">Selection</button>
+        <button class="tab-btn">Layout</button>
+        <button class="tab-btn">Files & Other</button>
+      </div>
+      <div class="tab-pane active">
+        <div class="fld-grid">
+          <div class="fld-card"><div class="fld-name">Data</div><div class="fld-desc">Single line of text — names, IDs, short answers</div></div>
+          <div class="fld-card"><div class="fld-name">Small Text</div><div class="fld-desc">Multi-line text, short entries</div></div>
+          <div class="fld-card"><div class="fld-name">Long Text</div><div class="fld-desc">Multi-line text, longer entries</div></div>
+          <div class="fld-card"><div class="fld-name">Int</div><div class="fld-desc">Whole numbers — counts, quantities</div></div>
+          <div class="fld-card"><div class="fld-name">Float</div><div class="fld-desc">Decimal numbers — percentages, scores</div></div>
+          <div class="fld-card"><div class="fld-name">Percent</div><div class="fld-desc">Percentage 0–100</div></div>
+          <div class="fld-card"><div class="fld-name">Date</div><div class="fld-desc">Date picker — day/month/year</div></div>
+          <div class="fld-card"><div class="fld-name">Datetime</div><div class="fld-desc">Date plus time picker</div></div>
+          <div class="fld-card"><div class="fld-name">Check</div><div class="fld-desc">A single yes/no checkbox</div></div>
+        </div>
+      </div>
+      <div class="tab-pane">
+        <div class="fld-grid">
+          <div class="fld-card"><div class="fld-name">Select</div><div class="fld-desc">Dropdown with fixed choices hardcoded in the field. Use for small stable lists (e.g., Gender).</div></div>
+          <div class="fld-card"><div class="fld-name">Link</div><div class="fld-desc">Dropdown that pulls from another DocType. Use for large/growing lists (e.g., State, Volunteer).</div></div>
+          <div class="fld-card"><div class="fld-name">Table</div><div class="fld-desc">Embeds a child table — a repeating "Add Row" section inside the form.</div></div>
+          <div class="fld-card"><div class="fld-name">Table MultiSelect</div><div class="fld-desc">Multi-select linked to another DocType. Pick multiple options.</div></div>
+          <div class="fld-card"><div class="fld-name">Geolocation</div><div class="fld-desc">GPS coordinates. On mobile, captures device location automatically.</div></div>
+        </div>
+        <div class="callout info" style="margin-top:14px"><span class="callout-icon">💡</span><div><strong>Select vs Link</strong><p>Use <strong>Select</strong> for short lists that never change (Gender: Male/Female/Other). Use <strong>Link</strong> when the list might grow or is shared across forms — adding new options requires no form editing.</p></div></div>
+      </div>
+      <div class="tab-pane">
+        <div class="fld-grid">
+          <div class="fld-card"><div class="fld-name">Section Break</div><div class="fld-desc">Starts a new visual card/block. Can have a title. Can be collapsible.</div></div>
+          <div class="fld-card"><div class="fld-name">Tab Break</div><div class="fld-desc">Creates a new tab at the top of the form — like pages in a long form.</div></div>
+          <div class="fld-card"><div class="fld-name">Column Break</div><div class="fld-desc">Arranges next fields side-by-side instead of stacking.</div></div>
+          <div class="fld-card"><div class="fld-name">HTML</div><div class="fld-desc">Displays formatted text or embedded content on the form.</div></div>
+        </div>
+      </div>
+      <div class="tab-pane">
+        <div class="fld-grid">
+          <div class="fld-card"><div class="fld-name">Attach</div><div class="fld-desc">File upload — any file type</div></div>
+          <div class="fld-card"><div class="fld-name">Attach Image</div><div class="fld-desc">Photo upload. On mobile, opens camera directly.</div></div>
+          <div class="fld-card"><div class="fld-name">Rating</div><div class="fld-desc">Star rating (1–5)</div></div>
+          <div class="fld-card"><div class="fld-name">Read Only</div><div class="fld-desc">Displays a value the user cannot edit.</div></div>
+          <div class="fld-card"><div class="fld-name">Button</div><div class="fld-desc">Clickable button that triggers a server action.</div></div>
+          <div class="fld-card"><div class="fld-name">Duration</div><div class="fld-desc">Time duration in hours/minutes.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Child Tables — Forms Inside Forms</h2>
+    <p>When a form needs a <strong>repeating list</strong>, use a Child Table. It appears as an "Add Row" section.</p>
+    <div class="card" style="margin-top:14px">
+      <div class="card-head"><div class="card-ico ci-green">📊</div><div class="card-title">Example: Household Survey → Family Members</div></div>
+      <div class="tbl" style="margin-top:12px">
+        <table>
+          <thead><tr><th>#</th><th>Name</th><th>Age</th><th>Gender</th><th>Education</th><th>Reading</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Ramesh Kumar</td><td>42</td><td>Male</td><td>Primary</td><td>Yes</td></tr>
+            <tr><td>2</td><td>Sunita Kumar</td><td>38</td><td>Female</td><td>Illiterate</td><td>No</td></tr>
+            <tr><td>3</td><td>Priya Kumar</td><td>14</td><td>Female</td><td>Secondary</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:8px;font-size:12px;color:var(--light)">Each row saves with the parent form. Rows can be added, edited, reordered, or deleted.</p>
+    </div>
+
+    <h2>How Fields Connect</h2>
+    <div class="acc-item open">
+      <div class="acc-hdr"><span class="acc-hdr-ico">🔗</span><span class="acc-hdr-title">Cascading Dropdowns (Link Filters)</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">
+        <p>Selecting a State narrows District. Selecting a District narrows Block. Works for any dependent pair, not just geography.</p>
+        <div style="display:flex;align-items:center;gap:8px;background:#F5F7FA;padding:12px;border-radius:8px;margin-top:12px;flex-wrap:wrap">
+          <span style="background:#0D9488;color:white;padding:5px 12px;border-radius:5px;font-size:12.5px;font-weight:500">State: Maharashtra</span>
+          <span style="color:var(--light)">→</span>
+          <span style="background:#EFF6FF;color:#1D4ED8;padding:5px 12px;border-radius:5px;font-size:12.5px;border:1px solid #BFDBFE">District: Pune ▼</span>
+          <span style="color:var(--light)">→</span>
+          <span style="background:#F0FDF4;color:#059669;padding:5px 12px;border-radius:5px;font-size:12.5px;border:1px solid #BBF7D0">Block: Haveli ▼</span>
+        </div>
+        <p style="margin-top:8px;font-size:12.5px">When State changes → District resets. When District changes → Block resets.</p>
+      </div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">✨</span><span class="acc-hdr-title">Auto-fill (Fetch From)</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p>Select a Volunteer → their name, designation, and GPS auto-populate from the Volunteer record. Auto-filled fields are read-only. Works on web and mobile from the same definition.</p></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">👁️</span><span class="acc-hdr-title">Conditional Visibility (Depends On)</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body">
+        <p>Each field has a self-contained "depends on" expression. The field appears only when the condition is true.</p>
+        <div style="background:#F5F7FA;border-radius:8px;padding:12px;margin-top:10px">
+          <code>doc.purpose_of_visit == "Training"</code>
+          <p style="margin-top:8px;font-size:12.5px">→ The Training section only appears when Purpose of Visit equals "Training".</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Three Script Layers</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Layer</th><th>Where It Runs</th><th>What It Does</th><th>Developer Needed?</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge ba-blue">Server Script (Python)</span></td><td>Server, every save</td><td>Complex validation: date ranges, numeric limits, enforcing conditional mandatory fields. The safety net.</td><td>Python dev</td></tr>
+          <tr><td><span class="badge ba-teal">Web Client Script (JS)</span></td><td>Browser (Desk only)</td><td>Real-time calculations, custom dropdown filtering, interactive feedback on web.</td><td>JS dev</td></tr>
+          <tr><td><span class="badge ba-purple">Mobile Handler (Dart)</span></td><td>App only</td><td>Same real-time behaviour on mobile: field-change calculations, on-validate checks.</td><td>Flutter dev</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn"><span class="callout-icon">⚠️</span><div><strong>When do you need a developer?</strong><p>No dev: add field, change label, add option, set default. Dev needed: new validation, auto-calculation between fields, custom dropdown filtering.</p></div></div>
+
+    <div class="quiz">
+      <h3>🧠 Chapter 2 — Quick Check</h3>
+      <div class="quiz-q">
+        <p>Training Topics might grow over time and are used in 3 forms. Which field type?</p>
+        <div class="quiz-opts">
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span> Select — hardcode options in each field</div>
+          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span> Link — pointing to a Training Topic Option Master DocType</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span> Check — a yes/no checkbox</div>
+        </div>
+        <div class="quiz-fb ok">✅ Correct! Link to an Option Master means adding topics without touching any form definition.</div>
+        <div class="quiz-fb bad">❌ Use Link to an Option Master. Adding new options won't require touching any form definition.</div>
+      </div>
+    </div>
+
+
+    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
+
+    <div class="page-nav">
+      <a href="ch1.html" class="pnav-btn"><span class="arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">System Overview</div></div></a>
+      <a href="ch3.html" class="pnav-btn next"><span class="arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">mForm → Frappe Mapping</div></div></a>
+    </div>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+<script>initPage('ch2');</script>
+</body>
+</html>
