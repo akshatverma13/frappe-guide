@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>mForm → Frappe Mapping · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Building Forms · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,126 +24,124 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 3</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
-      <div class="hero-pill">🔄 Chapter 3 of 7</div>
-      <h1>mForm → <span>Frappe</span> Mapping</h1>
-      <p>Your decoder ring. Every mForm concept translated to its Frappe equivalent, side-by-side.</p>
-      <div class="hero-tags"><span class="hero-tag">Question Types</span><span class="hero-tag">Skip Logic</span><span class="hero-tag">Validations</span><span class="hero-tag">Looping</span></div>
+      <div class="hero-pill">🔧 Chapter 3 of 7</div>
+      <h1>Building <em>Forms</em></h1>
+      <p>Conditional visibility, cascading dropdowns, auto-fill, option masters, workflows, and the form builder in full detail.</p>
+      <div class="hero-tags"><span class="hero-tag">Depends On</span><span class="hero-tag">Link Filters</span><span class="hero-tag">Fetch From</span><span class="hero-tag">Workflows</span><span class="hero-tag">Option Masters</span></div>
     </div>
-    <div class="callout key"><span class="callout-icon">🔑</span><div class="callout-body"><strong>The Biggest Shift</strong><p>In mForm, conditions are distributed across parent/child arrays and regex patterns. In Frappe, each field carries one self-contained "depends on" expression. One line, on the field itself. Much easier to read and maintain.</p></div></div>
 
-    <h2>Form-Level Concepts</h2>
+    <h2>Conditional Visibility — Depends On</h2>
+    <p>Every field (or Section Break) can have a <code>depends_on</code> expression — a condition that determines when that field is visible. When the condition is false, the field hides automatically. Works identically on web and mobile.</p>
+
+    <div class="code-block"><span class="cm">// Simple condition — show field only when status equals "Active"</span>
+<span class="kw">doc</span>.status == <span class="st">"Active"</span>
+
+<span class="cm">// AND condition — show when both conditions are true</span>
+<span class="kw">doc</span>.status == <span class="st">"Active"</span> &amp;&amp; <span class="kw">doc</span>.program == <span class="st">"Shiksha Plus"</span>
+
+<span class="cm">// OR condition — show when either condition is true</span>
+<span class="kw">doc</span>.purpose == <span class="st">"Training"</span> || <span class="kw">doc</span>.purpose == <span class="st">"Assessment"</span>
+
+<span class="cm">// Negation — show when field is NOT empty</span>
+<span class="kw">doc</span>.volunteer_id != <span class="st">""</span> &amp;&amp; <span class="kw">doc</span>.volunteer_id != null</div>
+
+    <div class="callout tip"><span class="callout-ico">✅</span><div class="callout-body"><strong>Key Advantage over mForm</strong><p>In mForm, skip logic was distributed across parent/child arrays with regex patterns. In Frappe, each field carries one self-contained <code>depends_on</code> expression — readable at a glance.</p></div></div>
+
+    <h2>Mandatory Depends On — Conditional Required Fields</h2>
+    <p>A field can be optional in general but become required when a condition is met, using <code>mandatory_depends_on</code>:</p>
+    <div class="code-block"><span class="cm">// "Batch Number" is only required when CMS Status = "Running"</span>
+mandatory_depends_on: <span class="kw">doc</span>.cms_status == <span class="st">"Running"</span></div>
+    <div class="callout warn"><span class="callout-ico">⚠️</span><div class="callout-body"><strong>Server-side enforcement required</strong><p>The form definition shows/hides the required indicator, but server-side scripts must explicitly enforce conditional mandatory fields — the server doesn't automatically validate them.</p></div></div>
+
+    <h2>Cascading Dropdowns — Link Filters</h2>
+    <p>Link fields can be filtered based on other fields' values. The most common pattern is geography — selecting a State automatically narrows the District list:</p>
+
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin:14px 0">
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <div style="background:var(--accent);color:white;padding:6px 14px;border-radius:var(--r-sm);font-size:12.5px;font-weight:500">Maharashtra</div>
+        <div style="color:var(--muted);font-size:12px">→ District narrows to</div>
+        <div style="background:var(--blue-bg);color:var(--blue);padding:6px 14px;border-radius:var(--r-sm);font-size:12.5px;border:1px solid var(--blue-border)">Pune ▾</div>
+        <div style="color:var(--muted);font-size:12px">→ Block narrows to</div>
+        <div style="background:var(--teal-bg);color:var(--teal);padding:6px 14px;border-radius:var(--r-sm);font-size:12.5px;border:1px solid var(--teal-border)">Haveli ▾</div>
+        <div style="color:var(--muted);font-size:12px">→ Village: <strong style="color:var(--text2)">Rohini</strong></div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted)">When State changes → District resets. When District changes → Block resets. Cascades all the way down.</div>
+    </div>
+
+    <div class="code-block"><span class="cm">// District field: only show districts where state = selected state</span>
+<span class="fn">filters</span>: { state: [<span class="st">"="</span>, [<span class="st">"state"</span>]] }
+
+<span class="cm">// Block field: filter by both state and district</span>
+<span class="fn">filters</span>: { state: [<span class="st">"="</span>, [<span class="st">"state"</span>]], district: [<span class="st">"="</span>, [<span class="st">"district"</span>]] }</div>
+
+    <h2>Auto-fill — Fetch From</h2>
+    <p>When a user selects a record from a Link field, other fields on the form can automatically copy values from that linked record using <code>fetch_from</code>:</p>
     <div class="tbl"><table>
-      <thead><tr><th>mForm</th><th>Frappe Equivalent</th><th>Notes</th></tr></thead>
+      <thead><tr><th>Trigger (Link Field)</th><th>Field That Auto-fills</th><th>fetch_from config</th></tr></thead>
       <tbody>
-        <tr><td>Form (JSON file)</td><td><span class="badge ba-indigo">DocType</span></td><td>Stored on server. Renders on web and mobile automatically.</td></tr>
-        <tr><td>formId</td><td>DocType name</td><td>e.g., "Household Survey" — permanent identifier</td></tr>
-        <tr><td>language array</td><td>Translation system</td><td>Managed on server, fetched by app per user preference</td></tr>
-        <tr><td>keyInfoOrders</td><td>"In List View" flag</td><td>Fields with this flag appear in the summary table</td></tr>
-        <tr><td>hold / isLocked</td><td>Workflow states</td><td>Draft → Submitted → Approved (role-based)</td></tr>
-        <tr><td>publish on/off</td><td>Mobile Configuration</td><td>Admin screen to enable/disable forms for mobile</td></tr>
+        <tr><td>volunteer_id (Link to Volunteer)</td><td>volunteer_name</td><td><code>volunteer_id.volunteer_name</code></td></tr>
+        <tr><td>volunteer_id (Link to Volunteer)</td><td>designation</td><td><code>volunteer_id.designation</code></td></tr>
+        <tr><td>volunteer_id (Link to Volunteer)</td><td>gps_location</td><td><code>volunteer_id.last_known_location</code></td></tr>
+        <tr><td>employee_id (Link to Employee)</td><td>department</td><td><code>employee_id.department</code></td></tr>
+      </tbody>
+    </table></div>
+    <p>Auto-filled fields are typically set to <strong>Read Only</strong> — the user sees the copied value but cannot change it. It comes from the source record.</p>
+
+    <h2>Option Masters — Managing Dropdown Choices</h2>
+    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">1️⃣</span><span class="acc-hdr-t">Pattern 1 — Hardcoded Select (small, stable lists)</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>Choices typed directly into the field definition separated by newlines. Example: <code>Male
+Female
+Other</code>. Use only when the list is short (≤5 options) and will <em>never</em> change.</p>
+    <p><strong>Limitation:</strong> Changing options requires editing the DocType definition — needs developer access.</p></div></div>
+
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">2️⃣</span><span class="acc-hdr-t">Pattern 2 — Link to Option Master DocType (preferred)</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>Options live in a separate DocType (e.g., "Education Level" with records: Illiterate, Primary, Secondary, Graduate). The field is a Link pointing to that DocType.</p>
+    <p><strong>Benefit:</strong> Admins can add/remove options through the UI, no developer needed. Same list can be shared across many forms. Options can have extra metadata (descriptions, ordering).</p></div></div>
+
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">3️⃣</span><span class="acc-hdr-t">Pattern 3 — Child Table with per-option data</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>When you need to record data <em>about</em> each selected option (score, status, observation), use a Child Table where each row links to an option and has additional fields.</p>
+    <p><strong>Example:</strong> Elementary DVR has a "5E Teaching Method" child table. Each row links to a 5E Option (Engage/Explore/Explain/Elaborate/Evaluate) AND has an observation status field.</p></div></div>
+
+    <h2>Frappe Workflows — Multi-stage Approvals</h2>
+    <p>Workflows define a state machine for a DocType — allowing records to move through stages with different permissions at each stage.</p>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--muted)">●</div><div class="flow-line"></div></div><div class="flow-content"><h4>Draft</h4><p>Default state. Field worker fills the form. Can edit freely. Only the creator and their supervisor can see it.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--accent)">●</div><div class="flow-line"></div></div><div class="flow-content"><h4>Submitted</h4><p>Field worker submits. Form is now locked — cannot be edited without approval. Coordinator notified.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--teal)">●</div><div class="flow-line"></div></div><div class="flow-content"><h4>Approved / Rejected</h4><p>Coordinator reviews and either Approves (finalizes) or Rejects (sends back for correction). Full history tracked in Timeline.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--green)">●</div><div class="flow-line"></div></div><div class="flow-content"><h4>Amended (if needed)</h4><p>If corrections needed after approval, an Amendment creates a new version while preserving the original — full audit trail maintained.</p></div></div>
+    </div>
+
+    <h2>Form Layout — Sections, Tabs, Columns</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Layout Element</th><th>What It Creates</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>Section Break</code></td><td>A visual card/block grouping related fields</td><td>Group 3–6 related fields together</td></tr>
+        <tr><td><code>Tab Break</code></td><td>A separate tab at the top of the form</td><td>Long forms with distinct categories of fields</td></tr>
+        <tr><td><code>Column Break</code></td><td>Next fields appear in a new side-by-side column</td><td>Fields that make sense next to each other (e.g., First Name / Last Name)</td></tr>
+        <tr><td>Section with <code>collapsible=1</code></td><td>A section that starts collapsed, expanded on click</td><td>Optional/infrequently needed fields</td></tr>
       </tbody>
     </table></div>
 
-    <h2>Question Types → Field Types</h2>
-    <div class="compare">
-      <div class="cmp-col">
-        <div class="cmp-hdr mf">📱 mForm Type</div>
-        <div class="cmp-row"><strong>Type 1</strong>Text input</div>
-        <div class="cmp-row"><strong>Type 2</strong>Numeric input</div>
-        <div class="cmp-row"><strong>Type 3</strong>Single-select dropdown</div>
-        <div class="cmp-row"><strong>Type 4</strong>Multi-select list</div>
-        <div class="cmp-row"><strong>Type 5</strong>Radio buttons</div>
-        <div class="cmp-row"><strong>Type 6</strong>Checkboxes</div>
-        <div class="cmp-row"><strong>Type 7</strong>Image capture</div>
-        <div class="cmp-row"><strong>Type 10</strong>Section header</div>
-        <div class="cmp-row"><strong>Type 14</strong>Date picker</div>
-        <div class="cmp-row"><strong>Type 19</strong>GPS location</div>
-        <div class="cmp-row"><strong>Types 20/21</strong>Looping questions</div>
-      </div>
-      <div class="cmp-col">
-        <div class="cmp-hdr fr">🖥️ Frappe Equivalent</div>
-        <div class="cmp-row"><code>Data</code> (single) or <code>Small Text</code> (multi-line)</div>
-        <div class="cmp-row"><code>Int</code> (whole) or <code>Float</code> (decimal)</div>
-        <div class="cmp-row"><code>Select</code> (fixed) or <code>Link</code> (to option master)</div>
-        <div class="cmp-row"><code>Table MultiSelect</code></div>
-        <div class="cmp-row"><code>Select</code> — renders as radio on mobile</div>
-        <div class="cmp-row"><code>Check</code> (single) or <code>Child Table</code> (multiple)</div>
-        <div class="cmp-row"><code>Attach Image</code></div>
-        <div class="cmp-row"><code>Section Break</code> or <code>Tab Break</code></div>
-        <div class="cmp-row"><code>Date</code> or <code>Datetime</code></div>
-        <div class="cmp-row"><code>Geolocation</code> or Lat/Long <code>Data</code> fields</div>
-        <div class="cmp-row"><code>Child Table</code> — each item is a row</div>
-      </div>
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 4</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 4</div><p>A field should appear only when 'Purpose of Visit' equals 'Training'. Where is this rule stored?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>In a separate Conditions DocType</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>In a Python server script that runs on every page load</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>In the field's own 'depends_on' expression</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>In the parent form's JavaScript file</div></div><div class="quiz-fb ok">✓ Correct! The depends_on expression is self-contained on the field itself.</div><div class="quiz-fb bad">✗ Each field has its own depends_on expression — readable at a glance, no need to trace parent arrays.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 4</div><p>What is the 'fetch_from' property used for?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Filtering a Link field's dropdown options based on another field</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Automatically copying a value from a linked record when the link is selected</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Fetching data from an external API</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Loading default values from the server</div></div><div class="quiz-fb ok">✓ Correct! fetch_from copies a value from the linked record into the current field when a link is selected.</div><div class="quiz-fb bad">✗ fetch_from auto-fills a field when a linked record is selected. For filtering, that's Link Filters, not fetch_from.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 4</div><p>You need a dropdown for Training Topics that 5 different forms use, and new topics are added every month. What's the best approach?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Hardcode options in a Select field on each form</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Create a Training Topic Option Master DocType and use Link fields pointing to it</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Store topics in a JavaScript array in a client script</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Create a new Select field on each form when new topics are added</div></div><div class="quiz-fb ok">✓ Correct! An Option Master DocType means adding topics requires no form editing — just create a new record.</div><div class="quiz-fb bad">✗ Link to an Option Master DocType. Admins can add topics as records, no developer needed, shared across all forms.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 4</div><p>In a Frappe Workflow, what does 'Amend' do?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Permanently deletes the original record</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Creates a new version of an approved record while preserving the original</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Rejects the submission and sends it back</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Submits the record directly without review</div></div><div class="quiz-fb ok">✓ Correct! Amendment creates a new version, keeping the original approved record intact for audit purposes.</div><div class="quiz-fb bad">✗ Amendment creates a new editable version while preserving the original — full audit trail maintained.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
     </div>
-
-    <h2>Skip Logic — Side by Side</h2>
-    <div class="tabs"><div class="tab-btns">
-      <button class="tab-btn active">mForm Approach</button>
-      <button class="tab-btn">Frappe Approach</button>
-      <button class="tab-btn">Mapping Table</button>
-    </div>
-    <div class="tab-pane active">
-      <p>Conditional visibility in mForm was <strong>distributed across multiple questions</strong>:</p>
-      <ul style="margin-top:10px;line-height:2.2"><li>Parent/child arrays referencing question IDs</li><li>Restriction type 11 for DID relations</li><li>Regex patterns like <code>parent_option: ^([1])$</code></li><li>AND logic by default, OR via special VAL_OR_CASE flag</li></ul>
-      <div class="callout warn" style="margin-top:12px"><span class="callout-icon">⚠️</span><div class="callout-body"><strong>Problem</strong><p>To understand when one field appeared, you traced arrays and regex patterns across many questions.</p></div></div>
-    </div>
-    <div class="tab-pane">
-      <p>In Frappe, <strong>each field carries its own self-contained condition</strong>:</p>
-      <div style="background:var(--bg2);border-radius:var(--r-sm);padding:14px;margin:10px 0"><code>doc.purpose_of_visit == "Training"</code><p style="margin-top:8px;font-size:12.5px;color:var(--muted)">→ Training section appears only when Purpose = Training. One expression, on the field itself.</p></div>
-      <p style="font-size:13px">AND: <code>doc.a == "X" &amp;&amp; doc.b == "Y"</code> &nbsp;·&nbsp; OR: <code>doc.a == "X" || doc.a == "Y"</code></p>
-      <div class="callout tip" style="margin-top:10px"><span class="callout-icon">✅</span><div class="callout-body"><strong>Result</strong><p>To understand when a field appears, read one expression on that field. No tracing required.</p></div></div>
-    </div>
-    <div class="tab-pane"><div class="tbl" style="margin:0"><table>
-      <thead><tr><th>mForm Mechanism</th><th>Frappe Equivalent</th></tr></thead>
-      <tbody>
-        <tr><td>parent/child arrays + type 11</td><td>"Depends On" expression on the field</td></tr>
-        <tr><td>Regex on parent_option</td><td>Direct comparison: <code>field == "Option"</code></td></tr>
-        <tr><td>AND logic (default)</td><td><code>&amp;&amp;</code> in depends_on</td></tr>
-        <tr><td>VAL_OR_CASE (OR)</td><td><code>||</code> in depends_on</td></tr>
-        <tr><td>VAL_REVERSE_VISIBILITY</td><td>Negate: <code>!=</code> instead of <code>==</code></td></tr>
-      </tbody>
-    </table></div></div></div>
-
-    <h2>Validation Codes</h2>
-    <div class="tbl"><table>
-      <thead><tr><th>mForm Code</th><th>What It Does</th><th>Frappe</th><th>Location</th></tr></thead>
-      <tbody>
-        <tr><td><code>VAL_REQUIRED (1)</code></td><td>Must be filled</td><td>"Required" flag on field</td><td><span class="badge ba-green">Form definition</span></td></tr>
-        <tr><td><code>VAL_NOT_ABLE_TO_FILL (3)</code></td><td>Read-only</td><td>"Read Only" flag on field</td><td><span class="badge ba-green">Form definition</span></td></tr>
-        <tr><td><code>VAL_OR_CASE (6)</code></td><td>OR visibility</td><td>OR in depends_on</td><td><span class="badge ba-green">Form definition</span></td></tr>
-        <tr><td><code>VAL_FORMULA (5)</code></td><td>Math computation</td><td>Mobile handler + client script</td><td><span class="badge ba-purple">Code</span></td></tr>
-        <tr><td><code>VAL_FUTURE/PAST (21/22)</code></td><td>Date validation</td><td>Server script</td><td><span class="badge ba-indigo">Server script</span></td></tr>
-        <tr><td><code>VAL_TAB_SECTIONS (150)</code></td><td>Tab layout</td><td>Tab Break field</td><td><span class="badge ba-green">Form definition</span></td></tr>
-        <tr><td><code>VAL_DEFAULT_PREFILLED (185)</code></td><td>Default value</td><td>"Default" property on field</td><td><span class="badge ba-green">Form definition</span></td></tr>
-      </tbody>
-    </table></div>
-
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 3</h3>
-      <div class="quiz-q"><p>In mForm, showing a field required parent/child arrays and regex. In Frappe?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A separate Conditions DocType listing all rules</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A "Depends On" expression written directly on each field</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A Python server script evaluated on each page load</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. Self-contained on the field. No tracing across arrays required.</div>
-        <div class="quiz-fb bad">✗ The "Depends On" expression lives directly on the field — self-contained and human-readable.</div>
-      </div>
-    </div>
-
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch2.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">How Forms Are Built</div></div></a>
-      <a href="ch4.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">The Web Side</div></div></a>
-    </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch2.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">DocTypes & Data Model</div></div></a><a href="ch4.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Frappe Desk (Web)</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch3');</script>
-</body>
-</html>
+<script>init('ch3');</script>
+</body></html>
