@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Data Flow & Sync · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mobile App & SDK · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,85 +24,143 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 6</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
-      <div class="hero-pill">⚡ Chapter 6 of 7</div>
-      <h1>Data Flow <span>&amp; Sync</span></h1>
-      <p>The complete data lifecycle. Three sync types, dependency ordering, delta sync, and error handling.</p>
-      <div class="hero-tags"><span class="hero-tag">Push Sync</span><span class="hero-tag">Pull Sync</span><span class="hero-tag">Schema Sync</span><span class="hero-tag">Delta Sync</span></div>
+      <div class="hero-pill">📱 Chapter 6 of 7</div>
+      <h1>Mobile App <em>&amp; SDK</em></h1>
+      <p>Flutter architecture, the SDK engine, offline-first design, Dart form handlers, the Mobile Controller pattern, and sync fundamentals.</p>
+      <div class="hero-tags"><span class="hero-tag">Flutter</span><span class="hero-tag">SDK Engine</span><span class="hero-tag">Dart Handlers</span><span class="hero-tag">Offline-First</span><span class="hero-tag">Mobile Controller</span></div>
     </div>
 
-    <h2>Three Types of Sync</h2>
-    <div class="tbl"><table>
-      <thead><tr><th>Type</th><th>Direction</th><th>What Travels</th><th>When</th></tr></thead>
-      <tbody>
-        <tr><td><span class="badge ba-indigo">Schema Sync</span></td><td>Server → App</td><td>Form definitions (fields, layout, conditions)</td><td>App startup, after form changes</td></tr>
-        <tr><td><span class="badge ba-teal">Push Sync</span></td><td>App → Server</td><td>Filled records (new, modified, deleted)</td><td>After save, startup, manual button</td></tr>
-        <tr><td><span class="badge ba-green">Pull Sync</span></td><td>Server → App</td><td>Other users' records, Desk edits, new master data</td><td>App startup, after push, manual</td></tr>
-      </tbody>
-    </table></div>
+    <div class="callout key"><span class="callout-ico">🔑</span><div class="callout-body"><strong>No form is hardcoded in the app</strong><p>Every form is built dynamically at runtime from the server's DocType definition. Change a form on the server → it updates on all devices at next sync. No app store update ever needed.</p></div></div>
 
-    <h2>Push Sync — Dependency Ordering</h2>
-    <p>Records upload in a specific sequence so all references resolve on the server before they are needed.</p>
-    <div style="display:flex;flex-direction:column;gap:2px;margin:14px 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)">
-      <div style="background:#EEF2FF;border:1px solid var(--indigo-mid);border-bottom:none;padding:10px 16px;font-size:13px;font-weight:600;color:#3730A3">Level 0 — First &nbsp;·&nbsp; Geography masters (State, District, Block, Village, Hamlet)</div>
-      <div style="background:var(--teal-light);border:1px solid #99F6E4;border-bottom:none;padding:10px 16px;font-size:13px;font-weight:600;color:#0F766E">Level 1 — Next &nbsp;·&nbsp; People masters (Employees, Volunteers, Households)</div>
-      <div style="background:var(--purple-light);border:1px solid #DDD6FE;border-bottom:none;padding:10px 16px;font-size:13px;font-weight:600;color:#5B21B6">Level 2 — Then &nbsp;·&nbsp; Transaction forms (DVRs, Attendance, Surveys)</div>
-      <div style="background:var(--green-light);border:1px solid #A7F3D0;padding:10px 16px;font-size:13px;font-weight:600;color:#065F46">Level 3 — Last &nbsp;·&nbsp; Forms that reference other transactions</div>
-    </div>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div class="callout-body"><strong>Why order matters</strong><p>A Visit Report references a Volunteer. If the Volunteer hasn't uploaded yet, the server rejects the Visit Report. Dependency ordering prevents this.</p></div></div>
-
-    <h2>Pull Sync — Delta Approach</h2>
-    <p>The app only asks for what has changed since its last sync — not the entire database every time.</p>
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px;margin:14px 0">
-      <div style="font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">App asks the server:</div>
-      <code style="display:block;padding:10px 14px;font-size:12.5px;">"Give me all Household Survey records modified after 2024-01-15 10:30:00"</code>
-      <p style="margin-top:8px;font-size:12.5px">Only changed records come down — fast even with thousands of records in the system.</p>
+    <h2>App Architecture — Thin Shell, Powerful SDK</h2>
+    <div class="cards">
+      <div class="card"><div class="ch"><div class="ci ci-a">🏠</div><div class="ct">App Shell (Project-specific)</div></div><p>Lightweight outer wrapper. Provides: app icon/branding, initial configuration URL, project-specific Dart form handlers, and custom UI overrides. This layer is different per client project.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-p">⚙️</div><div class="ct">Mobile SDK (Shared Engine)</div></div><p>The reusable engine. Handles: DocType definition parsing, dynamic form rendering as native Flutter widgets, local SQLite storage, sync engine, authentication, offline queue management. Shared across all projects.</p></div>
     </div>
 
-    <h2>Schema Sync — Automatic Form Updates</h2>
-    <div class="flow">
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--purple)">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>Admin changes a form on the server</h4><p>Adds a field, changes a label, or adds a new dropdown option.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--purple)">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>Server records a "last modified" timestamp</h4><p>Tracks exactly when each form definition last changed.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--purple)">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>App compares timestamps on next sync</h4><p>"My cached version is from Jan 15. Server says Jan 20. Download the fresh version."</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot" style="background:var(--purple)">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>Updated form appears automatically</h4><p>No Play Store update ever required — the app updates forms in the background.</p></div></div>
-    </div>
-
-    <h2>Error Handling</h2>
-    <div class="tbl"><table>
-      <thead><tr><th>Problem</th><th>What Happens</th><th>Recovery</th></tr></thead>
-      <tbody>
-        <tr><td>No internet for days</td><td>Records accumulate as Dirty. No data lost.</td><td>Auto-batch-sync when internet returns.</td></tr>
-        <tr><td>Partial sync failure</td><td>Successful records become Clean. Failed stay Dirty with error.</td><td>Next sync retries failures only.</td></tr>
-        <tr><td>Server rejects a record</td><td>Record stays Dirty. Error message stored locally.</td><td>User opens record, fixes issue, re-saves.</td></tr>
-        <tr><td>Two users edit same record</td><td>Last-write-wins by timestamp.</td><td>Rare — field workers cover separate areas.</td></tr>
-      </tbody>
-    </table></div>
-
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 6</h3>
-      <div class="quiz-q"><p>Why does Push Sync upload geography first, then people, then transaction forms?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>To save bandwidth — smaller files go first</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>To ensure referenced records exist on the server before forms that link to them</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>For alphabetical ordering in the server database</div>
+    <div class="diagram">
+      <div class="diagram-title">Mobile App Architecture</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:3px;max-width:400px;margin:0 auto">
+        <div style="background:var(--accent-light);border:1.5px solid var(--accent-mid);border-radius:8px;padding:10px 20px;text-align:center;width:100%">
+          <div style="font-size:12px;font-weight:600;color:var(--accent)">Project App Shell</div>
+          <div style="font-size:11px;color:var(--muted)">Branding · Config URL · Dart Handlers</div>
         </div>
-        <div class="quiz-fb ok">✓ Correct. A Visit Report links to a Volunteer — the Volunteer must exist on the server first.</div>
-        <div class="quiz-fb bad">✗ The order ensures referenced records exist before transaction forms that link to them.</div>
+        <div style="font-size:12px;color:var(--light)">wraps</div>
+        <div style="background:var(--purple-bg);border:1.5px solid var(--purple-border);border-radius:8px;padding:10px 20px;text-align:center;width:100%">
+          <div style="font-size:12px;font-weight:600;color:var(--purple)">Mobile SDK Engine</div>
+          <div style="font-size:11px;color:var(--muted)">Form Renderer · Sync · Auth · Storage</div>
+        </div>
+        <div style="font-size:12px;color:var(--light)">reads from / writes to</div>
+        <div style="display:flex;gap:8px;width:100%">
+          <div style="flex:1;background:var(--teal-bg);border:1.5px solid var(--teal-border);border-radius:8px;padding:10px;text-align:center">
+            <div style="font-size:11.5px;font-weight:600;color:var(--teal)">SQLite (Local)</div>
+            <div style="font-size:10.5px;color:var(--muted)">Offline storage</div>
+          </div>
+          <div style="flex:1;background:var(--green-bg);border:1.5px solid var(--green-border);border-radius:8px;padding:10px;text-align:center">
+            <div style="font-size:11.5px;font-weight:600;color:var(--green)">Frappe Server</div>
+            <div style="font-size:10.5px;color:var(--muted)">via REST / Sync</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch5.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">The Mobile App</div></div></a>
-      <a href="ch7.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Form & Module Reference</div></div></a>
+    <h2>The SDK Form Rendering Pipeline</h2>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>Fetch DocType definition</h4><p>SDK checks local cache. If stale or missing, downloads fresh definition from server. Cached in SQLite with a timestamp.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>Parse structure: Tabs → Sections → Columns → Fields</h4><p>SDK reads the ordered field list and builds a tree structure: which fields are in which tab, section, and column.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>Build Flutter widgets for each field type</h4><p>Data → TextFormField. Select → DropdownButton. Table → dynamic ListView with Add Row. Attach Image → camera/gallery picker. Each field type maps to a specific Flutter widget.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>Evaluate conditions — show/hide in real-time</h4><p>As the user fills fields, depends_on expressions are evaluated. Affected fields show/hide instantly using Flutter's reactive state management.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">5</div><div class="flow-line"></div></div><div class="flow-content"><h4>Attach Dart form handlers (on_field_change)</h4><p>Project-specific handlers are attached to field events. When a field changes, the handler fires — can update other fields, trigger calculations, or show alerts.</p></div></div>
     </div>
+
+    <h2>Dart Form Handlers — The Mobile Controller</h2>
+    <p>Form Handlers are Dart classes (one per DocType) that provide real-time behavior on the mobile app — the equivalent of Frappe's Web Client Scripts but for Flutter:</p>
+
+    <div class="code-block"><span class="cm">// HouseholdSurveyHandler.dart</span>
+<span class="kw">class</span> <span class="fn">HouseholdSurveyHandler</span> <span class="kw">extends</span> MobileFormHandler {
+
+  <span class="cm">// Fires when any field value changes</span>
+  @<span class="fn">override</span>
+  <span class="kw">void</span> <span class="fn">onFieldChange</span>(String fieldname, dynamic value, FormController ctrl) {
+    <span class="kw">switch</span> (fieldname) {
+
+      <span class="kw">case</span> <span class="st">"reading_level"</span>:
+      <span class="kw">case</span> <span class="st">"writing_level"</span>:
+      <span class="kw">case</span> <span class="st">"math_level"</span>:
+        <span class="cm">// Auto-calculate case category from three scores</span>
+        int r = ctrl.<span class="fn">getInt</span>(<span class="st">"reading_level"</span>);
+        int w = ctrl.<span class="fn">getInt</span>(<span class="st">"writing_level"</span>);
+        int m = ctrl.<span class="fn">getInt</span>(<span class="st">"math_level"</span>);
+        ctrl.<span class="fn">setValue</span>(<span class="st">"case_category"</span>, _<span class="fn">calculateCase</span>(r, w, m));
+        <span class="kw">break</span>;
+
+      <span class="kw">case</span> <span class="st">"village"</span>:
+        <span class="cm">// Filter volunteer dropdown when village changes</span>
+        ctrl.<span class="fn">setLinkFilter</span>(<span class="st">"volunteer_id"</span>, { <span class="st">"village"</span>: value });
+        ctrl.<span class="fn">clearValue</span>(<span class="st">"volunteer_id"</span>);
+        <span class="kw">break</span>;
+    }
+  }
+
+  <span class="cm">// Fires before saving — return false to block save</span>
+  @<span class="fn">override</span>
+  <span class="kw">bool</span> <span class="fn">onValidate</span>(FormController ctrl) {
+    <span class="kw">if</span> (ctrl.<span class="fn">getInt</span>(<span class="st">"total_children"</span>) == 0) {
+      ctrl.<span class="fn">showError</span>(<span class="st">"At least one family member must be recorded"</span>);
+      <span class="kw">return false</span>;
+    }
+    <span class="kw">return true</span>;
+  }
+}</div>
+
+    <h2>Offline-First Design</h2>
+    <div class="cards">
+      <div class="card"><div class="ch"><div class="ci ci-g">💾</div><div class="ct">Local SQLite Storage</div></div><p>All form definitions, records, dropdown options, auth tokens, and translations are stored in SQLite on the device. The user never needs to wait for a network request to fill forms.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-a">📶</div><div class="ct">Transparent Sync</div></div><p>The Save button behaves identically online or offline. The user never needs to check connectivity. If offline, data goes to the local queue and syncs automatically when internet returns.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-t">♾️</div><div class="ct">No Time Limit</div></div><p>Works offline indefinitely. Thousands of records can accumulate in the local queue. Only storage space limits offline capacity — and form data is lightweight text/numbers.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-m">🔄</div><div class="ct">Auth Token Rotation</div></div><p>Access token (24h) is refreshed automatically by the refresh token (30 days). Users stay logged in for 30 days of regular use without re-entering credentials.</p></div>
+    </div>
+
+    <h2>Record States</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>State</th><th>Meaning</th><th>Next Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-g">Clean</span></td><td>Fully synchronized with the server. No pending changes.</td><td>Nothing — record is current.</td></tr>
+        <tr><td><span class="badge ba-m">Dirty</span></td><td>Has local changes not yet uploaded. Has a temporary local ID or local-only changes.</td><td>Automatically uploaded on next sync.</td></tr>
+        <tr><td><span class="badge ba-r">Error</span></td><td>Tried to sync but server rejected — validation failed, duplicate key, missing reference.</td><td>User opens record, sees error message, fixes it, re-saves.</td></tr>
+        <tr><td><span class="badge ba-n">Deleted</span></td><td>Marked for deletion locally. Server copy not yet removed.</td><td>Delete request sent to server on next sync.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Login & Initial Sync Flow</h2>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>Check if mobile service is enabled</h4><p>App queries the server before showing the login screen. If mobile is disabled by admin, stops here with a message.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>Authentication</h4><p>Username/password or Mobile + OTP. On success: receives access token, refresh token, enabled forms list, user permissions, and language preference.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>Schema Sync — download form definitions</h4><p>Downloads all DocType definitions for enabled forms. Each definition includes fields, layout, conditions, naming rules, and permissions.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>Data Sync (Pull) — download existing records</h4><p>Downloads records the user has permission to see. Also downloads all dropdown option master records and translations.</p></div></div>
+      <div class="flow-step"><div class="flow-col"><div class="flow-dot">5</div><div class="flow-line"></div></div><div class="flow-content"><h4>Ready — go offline</h4><p>All data needed for offline work is now on the device. Internet can be switched off. The user can fill any form immediately.</p></div></div>
+    </div>
+
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 4</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 4</div><p>What is the 'Dart Form Handler' (Mobile Controller) in the Frappe mobile app?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A Flutter widget that displays forms</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A Dart class that provides real-time behavior on mobile — on_field_change, on_validate</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A server-side Python script that validates mobile submissions</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>The configuration file that sets the server URL</div></div><div class="quiz-fb ok">✓ Correct! Dart Form Handlers are the mobile equivalent of Frappe Web Client Scripts — real-time field calculations and validation on the app.</div><div class="quiz-fb bad">✗ Form Handlers are Dart classes attached to specific DocTypes providing on_field_change and on_validate events on mobile.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 4</div><p>A field worker saves 30 forms in an area with no internet. What happens when she gets connectivity?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The 30 forms are lost — she should have saved online</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>She must manually press a sync button for each form</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>All 30 forms (Dirty records) automatically upload to the server in batch</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Only the most recent 10 records sync; older ones are discarded</div></div><div class="quiz-fb ok">✓ Correct! Dirty records sync automatically and in batch when internet returns. No manual action needed.</div><div class="quiz-fb bad">✗ All Dirty records sync automatically when internet returns. No data loss, no manual action required.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 4</div><p>What is stored in the mobile app's local SQLite database?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Only the user's personal profile</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Form definitions, existing records, dropdown options, auth tokens, and translations</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Only records created offline — not downloaded records</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Only the last 100 records to save storage space</div></div><div class="quiz-fb ok">✓ Correct! Everything needed for offline use is cached: form definitions, records, options, tokens, and translations.</div><div class="quiz-fb bad">✗ SQLite stores everything: form definitions, all visible records, all dropdown options, auth tokens, and translations.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 4</div><p>What does the Frappe Mobile App's 'Schema Sync' do?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Uploads filled records to the server</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>Downloads other users' records from the server</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>Downloads updated form definitions (DocType metadata) when they change on the server</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Synchronizes the device clock with the server</div></div><div class="quiz-fb ok">✓ Correct! Schema Sync keeps form definitions up to date — no app store update needed when forms change.</div><div class="quiz-fb bad">✗ Schema Sync downloads updated DocType definitions. Push Sync uploads records. Pull Sync downloads records.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
+    </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch5.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Scripts & Validation</div></div></a><a href="ch7.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Sync, Roles & Config</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch6');</script>
-</body>
-</html>
+<script>init('ch6');</script>
+</body></html>
