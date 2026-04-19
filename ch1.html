@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>System Overview · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introduction to Frappe · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,96 +24,133 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 1</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
-      <div class="hero-pill">🗺️ Chapter 1 of 7</div>
-      <h1>System <span>Overview</span></h1>
-      <p>What the platform is, how its three layers connect, and the six terms you must understand before everything else.</p>
-      <div class="hero-tags"><span class="hero-tag">DocType</span><span class="hero-tag">Document</span><span class="hero-tag">Module</span><span class="hero-tag">Child Table</span><span class="hero-tag">3 Layers</span></div>
+      <div class="hero-pill">🌿 Chapter 1 of 7</div>
+      <h1><em>Introduction</em> to Frappe</h1>
+      <p>What Frappe is, why it exists, how it differs from traditional web frameworks, and the full stack it powers.</p>
+      <div class="hero-tags"><span class="hero-tag">Meta-driven</span><span class="hero-tag">Open Source</span><span class="hero-tag">Web + Mobile</span><span class="hero-tag">Python</span></div>
     </div>
 
-    <h2>The Core Principle</h2>
-    <p>Define a data collection form <strong>once on the server</strong> — it automatically works on both the web browser and the Android mobile app. Change it on the server and both update automatically. No app store update ever needed.</p>
-    <div class="callout key"><span class="callout-icon">🔑</span><div class="callout-body"><strong>One definition. Two interfaces. Automatic sync.</strong><p>This is the founding principle of the entire platform.</p></div></div>
+    <h2>What Is Frappe?</h2>
+    <p>Frappe is an open-source, low-code web application framework built on Python and JavaScript. Its core idea is <strong>meta-driven development</strong> — instead of writing code to create every form, table, and page, you define a <em>DocType</em> (a metadata description), and Frappe automatically generates the database table, the web form, the API endpoints, and the mobile representation.</p>
 
-    <h2>The Three Layers</h2>
-    <div class="layers">
-      <div class="layer l1"><div class="layer-ico">🧠</div><div><div class="layer-name">Server — Frappe</div><div class="layer-desc">The brain. Stores form definitions, collected data, user accounts, permissions, and all business rules.</div></div></div>
-      <div class="layer l2"><div class="layer-ico">🖥️</div><div><div class="layer-name">Frappe Desk — Web Interface</div><div class="layer-desc">Browser-based back office. Coordinators and admins review data, configure forms, manage users. No installation needed.</div></div></div>
-      <div class="layer l3"><div class="layer-ico">📱</div><div><div class="layer-name">Mobile App — Android</div><div class="layer-desc">Field workers collect data. Works completely offline. Syncs to server when internet returns. No data loss.</div></div></div>
+    <div class="callout key"><span class="callout-ico">🔑</span><div class="callout-body"><strong>The Core Idea</strong><p>In most frameworks, adding a new form means writing models, controllers, views, and migrations. In Frappe, you create a DocType definition and everything is generated for you — database, web UI, REST API, and mobile form.</p></div></div>
+
+    <h2>The Frappe Stack</h2>
+    <div class="stack">
+      <div class="stack-layer sl-0">
+        <div class="sl-icon">🧠</div>
+        <div><div class="sl-name">Frappe Framework (Python)</div><div class="sl-desc">ORM, MetaData engine, REST API, authentication, workflow engine, scheduler, email</div></div>
+      </div>
+      <div class="stack-layer sl-1">
+        <div class="sl-icon">🖥️</div>
+        <div><div class="sl-name">Frappe Desk (JavaScript + Vue)</div><div class="sl-desc">Browser-based UI — List Views, Form Views, Reports, Dashboards, Workspaces</div></div>
+      </div>
+      <div class="stack-layer sl-2">
+        <div class="sl-icon">📱</div>
+        <div><div class="sl-name">Mobile SDK (Flutter / Dart)</div><div class="sl-desc">Android app — offline-first, dynamic form rendering, sync engine, local SQLite storage</div></div>
+      </div>
+      <div class="stack-layer sl-3">
+        <div class="sl-icon">🗄️</div>
+        <div><div class="sl-name">MariaDB + Redis</div><div class="sl-desc">Persistent storage (MariaDB) + caching, background jobs, real-time events (Redis)</div></div>
+      </div>
     </div>
 
-    <h2>Six Terms to Know</h2>
-    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">📄</span><span class="acc-hdr-title">DocType — The Form Template</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>A <strong>DocType</strong> is a form blueprint — defines fields, types, required status, layout, permissions, and naming rules. It is the blank form structure, not the data itself.</p>
-    <div class="callout tip" style="margin-top:10px"><span class="callout-icon">✅</span><div class="callout-body"><strong>mForm equivalent</strong><p>In mForm, this was a Form JSON file. In Frappe, it's a DocType stored and editable on the server.</p></div></div></div></div>
-
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📝</span><span class="acc-hdr-title">Document — A Filled-in Form Submission</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>Every time someone fills a DocType and saves, that creates one <strong>Document</strong>. 500 households surveyed = 500 Documents of the Household Survey DocType, each with a unique ID like HH-00001.</p></div></div>
-
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📁</span><span class="acc-hdr-title">Module — A Folder Grouping Related DocTypes</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>A <strong>Module</strong> is a category. All Shiksha Plus forms live in the "Shiksha Plus" module. All geography forms live in "Geo Master." In Frappe Desk, you navigate by module from the left sidebar.</p></div></div>
-
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📊</span><span class="acc-hdr-title">Child Table — A Repeating List Inside a Form</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>A <strong>Child Table</strong> is an "Add Row" section inside a form for repeating entries. Example: Household Survey has a Family Members child table — each row has name, age, gender, education.</p>
-    <div class="callout tip" style="margin-top:10px"><span class="callout-icon">✅</span><div class="callout-body"><strong>mForm equivalent</strong><p>Replaces Looping Questions (types 20/21) in mForm.</p></div></div></div></div>
-
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📚</span><span class="acc-hdr-title">Master Data — Reference Data</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p><strong>Master Data</strong> is created once and referenced by many forms: states, districts, employees, volunteers, dropdown option lists. Must be created before transaction forms that reference it.</p></div></div>
-
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📊</span><span class="acc-hdr-title">Transaction Data — Field-Collected Data</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p><strong>Transaction Data</strong> is the actual field work: visit reports, attendance, assessments, surveys. These reference master data — a visit report links to a volunteer and a geography location.</p></div></div>
-
-    <h2>How Everything Connects</h2>
-    <div class="flow">
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>Admin defines a DocType on the server</h4><p>Creates the form template in Frappe Desk — adds fields, conditions, and permissions.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>Form appears instantly on Frappe Desk</h4><p>Any authorized web user can fill it in the browser immediately.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>Admin enables the form for mobile</h4><p>In Mobile Configuration, enables the form. App picks it up on next sync.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>Field workers fill the form — even offline</h4><p>Data saves locally on the device. Syncs to server when internet returns.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">5</div><div class="flow-line"></div></div><div class="flow-content"><h4>Coordinators review and approve on Desk</h4><p>See all submitted data, approve or reject, add comments, run reports.</p></div></div>
+    <h2>Three Layers of the Platform</h2>
+    <div class="diagram">
+      <div class="diagram-title">Platform Architecture</div>
+      <div class="arch-row">
+        <div class="arch-box server">
+          <div class="ab-icon">🧠</div>
+          <div class="ab-name">Server</div>
+          <div class="ab-sub">Frappe · Python</div>
+        </div>
+        <div class="arch-arrow">
+          <div class="arch-line bi"></div>
+          <div class="arch-label">HTTP / REST</div>
+        </div>
+        <div class="arch-box web">
+          <div class="ab-icon">🖥️</div>
+          <div class="ab-name">Frappe Desk</div>
+          <div class="ab-sub">Browser · JS</div>
+        </div>
+        <div class="arch-arrow" style="margin-left:20px">
+          <div class="arch-line bi"></div>
+          <div class="arch-label">REST / Sync</div>
+        </div>
+        <div class="arch-box mobile">
+          <div class="ab-icon">📱</div>
+          <div class="ab-name">Mobile App</div>
+          <div class="ab-sub">Flutter · Dart</div>
+        </div>
+      </div>
     </div>
 
-    <h2>Smart Features</h2>
+    <h2>Why Frappe? — Key Advantages</h2>
     <div class="cards">
-      <div class="card"><div class="card-head"><div class="card-ico ci-teal">🔗</div><div class="card-title">Cascading Dropdowns</div></div><p>Select State → District list narrows. Select District → Block narrows. Works on web and mobile from the same definition.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">👁️</div><div class="card-title">Conditional Fields</div></div><p>Fields show or hide based on user input. Defined once — works identically on web and mobile.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-amber">✨</div><div class="card-title">Auto-fill from Links</div></div><p>Select a Volunteer → their name, designation, GPS auto-populate. Reduces data entry errors.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-purple">🛡️</div><div class="card-title">Layered Validation</div></div><p>Simple rules in form definition. Complex rules in Server Scripts. Real-time feedback via Client Scripts.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-a">⚡</div><div class="ct">Rapid Development</div></div><p>Adding a new form takes minutes, not days. Define the DocType, and Frappe generates the database table, web form, API, and mobile form automatically.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-t">🔄</div><div class="ct">One Definition, Two Interfaces</div></div><p>Define a form once — it works on both the web browser and the Android mobile app. Change it once, both update automatically. No duplicate work.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-g">📶</div><div class="ct">Offline-First Mobile</div></div><p>The mobile app stores everything locally and syncs when internet is available. Field workers can collect data in areas with no connectivity.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-m">🔓</div><div class="ct">Open Source & Self-Hosted</div></div><p>Frappe is fully open source (MIT license). You control your data, your server, and your customizations. No vendor lock-in.</p></div>
     </div>
 
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 1</h3>
-      <div class="quiz-q"><p>What is a "DocType" in Frappe?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A filled-in form with data — one submission</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A form template — the blank structure defining what fields exist</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A folder grouping related forms</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. A DocType is the template. Each filled submission creates a separate Document.</div>
-        <div class="quiz-fb bad">✗ A DocType is the form template (blank structure). A filled-in submission is called a Document.</div>
-      </div>
-      <div class="quiz-q"><p>If an admin changes a form on the server, what happens to the mobile app?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Nothing — the app must be updated from the Play Store</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>The app downloads the updated form definition automatically on next sync</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Only web users see the change</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. Form changes propagate automatically. No Play Store update ever required.</div>
-        <div class="quiz-fb bad">✗ The app downloads updated form definitions automatically on next sync. No Play Store update needed.</div>
-      </div>
+    <h2>Meta-driven Development — How It Works</h2>
+    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">📐</span><span class="acc-hdr-t">Step 1 — Define a DocType (metadata)</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>You create a DocType definition — essentially a configuration file describing fields, types, required status, layout, and permissions. This is done visually in Frappe Desk, no coding required for standard forms.</p></div></div>
+
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🗄️</span><span class="acc-hdr-t">Step 2 — Frappe creates the database table</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>When you save a DocType, Frappe automatically creates or alters the corresponding MariaDB table. Add a field — the column is added. Remove a field — the column is archived. No SQL migrations needed.</p></div></div>
+
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🌐</span><span class="acc-hdr-t">Step 3 — Web form and API are generated</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>Frappe Desk automatically generates a List View (table of all records) and a Form View (the full form) for every DocType. REST API endpoints are also generated: <code>GET /api/resource/DocType</code>, <code>POST /api/resource/DocType</code>, etc.</p></div></div>
+
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">📱</span><span class="acc-hdr-t">Step 4 — Mobile app reads the same definition</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>The mobile SDK downloads the DocType definition from the server and dynamically renders it as native Android screens. The same fields, conditions, and options — no separate mobile form configuration needed.</p></div></div>
+
+    <h2>Frappe vs Traditional Development</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Task</th><th>Traditional Framework</th><th>Frappe</th></tr></thead>
+      <tbody>
+        <tr><td>Add a new form</td><td>Model + migration + controller + view + API = days</td><td>Create DocType = minutes</td></tr>
+        <tr><td>Add a field</td><td>Update model, migration, form template, API serializer</td><td>Add field to DocType — done</td></tr>
+        <tr><td>Mobile form</td><td>Build separate mobile UI</td><td>Same DocType renders on mobile automatically</td></tr>
+        <tr><td>REST API</td><td>Write endpoints manually</td><td>Auto-generated for every DocType</td></tr>
+        <tr><td>Permissions</td><td>Custom middleware per route</td><td>Role-based permissions on DocType</td></tr>
+        <tr><td>Audit trail</td><td>Build logging system</td><td>Built-in Document Versioning on every record</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>Key Terminology</h2>
+    <div class="glos-grid">
+      <div class="glos-item"><div class="glos-term">DocType</div><div class="glos-def">A form template / data model definition. Defines fields, layout, rules, and permissions.</div></div>
+      <div class="glos-item"><div class="glos-term">Document</div><div class="glos-def">A single record / instance of a DocType. One filled-in form = one Document.</div></div>
+      <div class="glos-item"><div class="glos-term">Module</div><div class="glos-def">A logical grouping of related DocTypes. Like a folder in the sidebar.</div></div>
+      <div class="glos-item"><div class="glos-term">Frappe Desk</div><div class="glos-def">The browser-based back office UI that comes with every Frappe installation.</div></div>
+      <div class="glos-item"><div class="glos-term">Frappe App</div><div class="glos-def">A Python package that extends Frappe with new DocTypes, scripts, and features.</div></div>
+      <div class="glos-item"><div class="glos-term">Site</div><div class="glos-def">A single Frappe deployment / database — one URL, one set of users and data.</div></div>
+      <div class="glos-item"><div class="glos-term">Bench</div><div class="glos-def">The command-line tool and directory structure that manages Frappe installations.</div></div>
+      <div class="glos-item"><div class="glos-term">Fixtures</div><div class="glos-def">Pre-loaded data (records) that are bundled with a Frappe app and installed automatically.</div></div>
     </div>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="index.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Overview</div></div></a>
-      <a href="ch2.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">How Forms Are Built</div></div></a>
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 5</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 5</div><p>What is the core principle of Frappe's meta-driven development?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Write controllers and views manually for every form</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Define a DocType — and the database, web form, API, and mobile form are generated automatically</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Use a separate framework for web and mobile</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Write SQL migrations for every data change</div></div><div class="quiz-fb ok">✓ Correct! Frappe generates everything from the DocType definition — database, web UI, REST API, and mobile form.</div><div class="quiz-fb bad">✗ The core idea is: define a DocType, and Frappe generates the database table, web form, API, and mobile representation automatically.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 5</div><p>If you add a field to a DocType in Frappe, what happens to the database?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Nothing — you must write a SQL migration manually</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>The entire database is recreated</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>Frappe automatically adds the column to the MariaDB table</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>You must restart the server for changes to take effect</div></div><div class="quiz-fb ok">✓ Correct! Frappe handles database migrations automatically when you modify a DocType.</div><div class="quiz-fb bad">✗ Frappe automatically alters the database table when you save changes to a DocType definition.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 5</div><p>What is Frappe Desk?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The command-line tool for managing Frappe</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>The mobile app used by field workers</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>The browser-based back office UI generated automatically for every DocType</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>The database engine powering Frappe</div></div><div class="quiz-fb ok">✓ Correct! Frappe Desk is the auto-generated browser UI with List Views, Form Views, Reports, and Dashboards.</div><div class="quiz-fb bad">✗ Frappe Desk is the browser-based back office interface — not the mobile app, not the CLI.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 5</div><p>What does 'offline-first' mean for the Frappe mobile app?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The app only works without internet</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Data is saved locally on the device and syncs to the server when internet returns</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>The app must be online to open forms</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Offline data is permanently stored on the device and never synced</div></div><div class="quiz-fb ok">✓ Correct! Offline-first means the app works fully without internet, storing data locally and syncing when connected.</div><div class="quiz-fb bad">✗ Offline-first: the app saves data locally and syncs to the server when internet is available. No data loss.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 5 of 5</div><p>What is a Frappe 'Site'?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A collection of DocTypes grouped by module</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>The physical server running Frappe</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>A single Frappe deployment with its own database, users, and URL</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>A Python file containing custom business logic</div></div><div class="quiz-fb ok">✓ Correct! A Site is one Frappe deployment — one URL, one database, one set of users.</div><div class="quiz-fb bad">✗ A Site is a single Frappe deployment with its own database and URL, managed by Bench.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
     </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="index.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Home</div></div></a><a href="ch2.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">DocTypes & Data Model</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch1');</script>
-</body>
-</html>
+<script>init('ch1');</script>
+</body></html>
