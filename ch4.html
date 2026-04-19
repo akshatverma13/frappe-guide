@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Web Side (Frappe Desk) · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frappe Desk · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,98 +24,127 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 4</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
       <div class="hero-pill">🖥️ Chapter 4 of 7</div>
-      <h1>The Web Side —<br><span>Frappe Desk</span></h1>
-      <p>What coordinators, supervisors, and admins see and do in the browser. List View, Form View, approvals, and timeline.</p>
-      <div class="hero-tags"><span class="hero-tag">List View</span><span class="hero-tag">Form View</span><span class="hero-tag">Approvals</span><span class="hero-tag">Timeline</span><span class="hero-tag">Export</span></div>
+      <h1>Frappe <em>Desk</em></h1>
+      <p>The browser-based back office. List View, Form View, Report Builder, Dashboards, Workspaces, and the full approval system.</p>
+      <div class="hero-tags"><span class="hero-tag">List View</span><span class="hero-tag">Form View</span><span class="hero-tag">Reports</span><span class="hero-tag">Dashboards</span><span class="hero-tag">Timeline</span></div>
     </div>
 
     <h2>What Is Frappe Desk?</h2>
-    <p>The browser-based back office. <strong>No installation.</strong> Open a browser, go to the site URL, log in. Works on Chrome, Firefox, Edge, and Safari.</p>
+    <p>Frappe Desk is the browser-based interface that comes built into every Frappe installation. It is a full-featured back office — no installation needed, works on any modern browser. It is the primary interface for coordinators, supervisors, and administrators.</p>
     <div class="cards">
-      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">⚙️</div><div class="card-title">Administrators</div></div><ul style="font-size:12.5px;line-height:2;margin-top:4px"><li>Create and modify form definitions (DocTypes)</li><li>Create user accounts and assign roles</li><li>Configure which forms appear on mobile</li><li>Add or modify dropdown option lists</li></ul></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-teal">👥</div><div class="card-title">Coordinators / Supervisors</div></div><ul style="font-size:12.5px;line-height:2;margin-top:4px"><li>Review data submitted by field workers</li><li>Approve or reject submissions</li><li>Run reports and export data to CSV/Excel</li><li>Manage master data (geography, employees)</li></ul></div>
+      <div class="card"><div class="ch"><div class="ci ci-a">⚙️</div><div class="ct">Administrators</div></div><ul style="font-size:12.5px;line-height:2"><li>Create/modify DocTypes and fields</li><li>Create user accounts, assign roles</li><li>Configure mobile app settings</li><li>Manage dropdown option lists</li><li>Set up workflows and assignment rules</li></ul></div>
+      <div class="card"><div class="ch"><div class="ci ci-t">👥</div><div class="ct">Coordinators / Supervisors</div></div><ul style="font-size:12.5px;line-height:2"><li>Review and approve submitted records</li><li>Run and export reports</li><li>Manage master data (employees, geography)</li><li>Add comments and corrections to records</li><li>Monitor dashboards and KPIs</li></ul></div>
     </div>
 
+    <h2>Navigating Desk</h2>
+    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">📁</span><span class="acc-hdr-t">Sidebar — Modules and DocTypes</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>The left sidebar lists all Modules. Click a module to expand it and see all its DocTypes. Click any DocType to open its List View. You can pin frequently used items to the top of the sidebar.</p></div></div>
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🏠</span><span class="acc-hdr-t">Workspaces — Customizable Dashboards</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>A Workspace is a customizable landing page for a module. It can contain shortcuts, summary numbers, charts, links to reports, and notes. Each module typically has its own Workspace. Users can create personal Workspaces.</p></div></div>
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🔍</span><span class="acc-hdr-t">Global Search — Find Anything</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>The search bar at the top (keyboard shortcut: Ctrl/Cmd + G) searches across all DocTypes, records, and settings. Start typing a record name, DocType, user, or setting and it appears instantly.</p></div></div>
+    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">🔔</span><span class="acc-hdr-t">Notifications and Assignments</span><span class="acc-arr">▼</span></div>
+    <div class="acc-body"><p>The bell icon shows all notifications — records assigned to you, mentions in comments, workflow transitions. The "Assigned to Me" view (⊹ icon) shows all your pending tasks across all DocTypes.</p></div></div>
+
     <h2>List View — All Records at a Glance</h2>
-    <p>Opening a DocType shows the List View — a table of all records. Filter, sort, search, and bulk-select.</p>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:14px 0;box-shadow:var(--sh)">
-      <div style="background:#F9FAFB;border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px">
-        <span style="font-size:13px;font-weight:600;color:var(--text-2)">Household Survey</span>
-        <span style="background:var(--indigo-light);color:var(--indigo);padding:1px 8px;border-radius:10px;font-size:11px;font-weight:500">142 records</span>
-        <span style="margin-left:auto;background:var(--indigo);color:white;padding:4px 14px;border-radius:5px;font-size:12px;font-weight:500;cursor:pointer">+ New</span>
-      </div>
-      <div style="padding:8px 16px;display:flex;gap:6px;border-bottom:1px solid var(--border-light);background:var(--bg)">
-        <span style="background:var(--bg2);padding:4px 10px;border-radius:5px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--border)">Filter</span>
-        <span style="background:var(--bg2);padding:4px 10px;border-radius:5px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--border)">Date Range</span>
-        <span style="margin-left:auto;background:var(--bg2);padding:4px 10px;border-radius:5px;font-size:12px;color:var(--muted);cursor:pointer;border:1px solid var(--border)">Export →</span>
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r);overflow:hidden;margin:14px 0;box-shadow:var(--sh)">
+      <div style="background:var(--bg3);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:13px;font-weight:600;color:var(--text2)">Daily Visit Report</span>
+        <span style="background:var(--accent-light);color:var(--accent);padding:1px 8px;border-radius:10px;font-size:11px;font-weight:500">1,247 records</span>
+        <span style="margin-left:auto;display:flex;gap:6px">
+          <span style="background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:var(--r-sm);font-size:11.5px;cursor:pointer">Filter</span>
+          <span style="background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:var(--r-sm);font-size:11.5px;cursor:pointer">Sort</span>
+          <span style="background:var(--accent);color:white;padding:3px 12px;border-radius:var(--r-sm);font-size:11.5px;cursor:pointer;font-weight:500">Export</span>
+        </span>
       </div>
       <div class="tbl" style="margin:0;border:none;border-radius:0;box-shadow:none"><table>
-        <thead><tr><th>☐</th><th>ID</th><th>Village</th><th>Head of Household</th><th>Family Size</th><th>Status</th></tr></thead>
+        <thead><tr><th>☐</th><th>ID</th><th>Date</th><th>Volunteer</th><th>Village</th><th>Purpose</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>☐</td><td style="color:var(--indigo);cursor:pointer;font-weight:500">HH-00142</td><td>Rohini Village</td><td>Ramesh Kumar</td><td>4</td><td><span class="badge ba-green">Approved</span></td></tr>
-          <tr><td>☐</td><td style="color:var(--indigo);cursor:pointer;font-weight:500">HH-00141</td><td>Ambavane</td><td>Priya Devi</td><td>6</td><td><span class="badge ba-amber">Pending</span></td></tr>
-          <tr><td>☐</td><td style="color:var(--indigo);cursor:pointer;font-weight:500">HH-00140</td><td>Rohini Village</td><td>Suresh Yadav</td><td>3</td><td><span class="badge ba-indigo">Submitted</span></td></tr>
+          <tr><td>☐</td><td style="color:var(--accent);font-weight:500;cursor:pointer">SPDVR-01247</td><td>17 Apr 2026</td><td>Kavita Devi</td><td>Rohini Village</td><td>Training</td><td><span class="badge ba-g">Approved</span></td></tr>
+          <tr><td>☐</td><td style="color:var(--accent);font-weight:500;cursor:pointer">SPDVR-01246</td><td>17 Apr 2026</td><td>Ramesh Gupta</td><td>Ambavane</td><td>Classroom Obs.</td><td><span class="badge ba-m">Pending</span></td></tr>
+          <tr><td>☐</td><td style="color:var(--accent);font-weight:500;cursor:pointer">SPDVR-01245</td><td>16 Apr 2026</td><td>Sunita Yadav</td><td>Nere Village</td><td>Library</td><td><span class="badge ba-a">Submitted</span></td></tr>
         </tbody>
       </table></div>
     </div>
+    <p><strong>Key List View features:</strong> filter by any field combination, sort by clicking headers, bulk-select records for export/delete/status change, save custom filters as views, export to CSV or Excel.</p>
+
+    <h2>Form View — One Record in Full</h2>
+    <div class="cards three">
+      <div class="card"><div class="ch"><div class="ci ci-a">📄</div><div class="ct">Sections as Cards</div></div><p>Fields grouped into visual cards. Each Section Break creates one card. Can be collapsed.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-t">📑</div><div class="ct">Tabs at the Top</div></div><p>Long forms use Tab Breaks to create navigable sections — click to switch between tabs.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-g">📊</div><div class="ct">Live Child Tables</div></div><p>Add, edit, reorder, delete rows in child tables directly in the form view.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-m">👁️</div><div class="ct">Live Conditions</div></div><p>Conditional fields show/hide in real-time as values change — identical to mobile behavior.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-p">⚠️</div><div class="ct">Inline Validation</div></div><p>Validation errors appear next to the problem field — not as pop-ups.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-r">📜</div><div class="ct">Sidebar Links</div></div><p>Related records (other DocTypes linked to this one) appear in the right sidebar for quick navigation.</p></div>
+    </div>
 
     <h2>Timeline — Complete Audit Trail</h2>
-    <p>Every record has a Timeline at the bottom — an immutable history of every edit, comment, and workflow transition.</p>
-    <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--sh)">
+    <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--r);padding:18px;margin:14px 0;box-shadow:var(--sh)">
       <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-start">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">R</div>
-        <div><div style="font-size:12.5px;font-weight:500;color:var(--text-2)">Ravi Kumar <span style="color:var(--light);font-weight:400">created this record</span></div><div style="font-size:11px;color:var(--light);margin-top:1px">Today 10:23 AM</div></div>
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">K</div>
+        <div><div style="font-size:12.5px;font-weight:500;color:var(--text2)">Kavita Devi <span style="font-weight:400;color:var(--muted)">created this record on the mobile app</span></div><div style="font-size:11px;color:var(--light)">17 Apr 2026 · 9:14 AM</div></div>
       </div>
       <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-start">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">S</div>
-        <div><div style="font-size:12.5px;font-weight:500;color:var(--text-2)">Sunita <span style="color:var(--light);font-weight:400">changed Status: Draft → Submitted</span></div><div style="font-size:11px;color:var(--light);margin-top:1px">Today 2:45 PM</div></div>
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-2);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">K</div>
+        <div><div style="font-size:12.5px;font-weight:500;color:var(--text2)">Kavita Devi <span style="font-weight:400;color:var(--muted)">changed <strong>Learner Count</strong> from 14 to 17</span></div><div style="font-size:11px;color:var(--light)">17 Apr 2026 · 9:31 AM</div></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-bottom:14px;align-items:flex-start">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">R</div>
+        <div><div style="font-size:12.5px;font-weight:500;color:var(--text2)">Ravi Coordinator <span style="font-weight:400;color:var(--muted)">submitted this record</span> → status: Pending Review</div><div style="font-size:11px;color:var(--light)">17 Apr 2026 · 11:02 AM</div></div>
       </div>
       <div style="display:flex;gap:10px;align-items:flex-start">
         <div style="width:28px;height:28px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;flex-shrink:0;font-weight:600">A</div>
-        <div><div style="font-size:12.5px;font-weight:500;color:var(--text-2)">Asha Coordinator <span style="color:var(--green);font-weight:600">approved</span></div><div style="font-size:11px;color:var(--light);margin-top:1px">Today 4:10 PM</div><div style="font-size:12.5px;color:#065F46;margin-top:6px;background:var(--green-light);padding:8px 10px;border-radius:6px;border:1px solid #A7F3D0">"Verified. All family members accounted for."</div></div>
+        <div><div style="font-size:12.5px;font-weight:500;color:var(--text2)">Asha State Coord. <span style="color:var(--green);font-weight:600">approved</span> this record</div><div style="font-size:11px;color:var(--light)">17 Apr 2026 · 2:45 PM</div><div style="font-size:12.5px;color:var(--green);margin-top:5px;background:var(--green-bg);padding:7px 10px;border-radius:var(--r-sm);border:1px solid var(--green-border)">"Verified on field visit. Count confirmed correct."</div></div>
       </div>
     </div>
 
-    <h2>Desk vs Mobile App</h2>
+    <h2>Report Builder</h2>
+    <p>Frappe has four types of reports, each suited to different needs:</p>
     <div class="tbl"><table>
-      <thead><tr><th>Feature</th><th>Frappe Desk (Web)</th><th>Mobile App</th></tr></thead>
+      <thead><tr><th>Report Type</th><th>How It's Built</th><th>Best For</th></tr></thead>
       <tbody>
-        <tr><td>Offline capability</td><td><span class="badge ba-red">No</span> — needs internet</td><td><span class="badge ba-green">Yes</span> — fully offline</td></tr>
-        <tr><td>Reports & Data Export</td><td><span class="badge ba-green">Yes</span> — CSV/Excel</td><td><span class="badge ba-red">No</span></td></tr>
-        <tr><td>Approval workflows</td><td><span class="badge ba-green">Full workflow</span></td><td><span class="badge ba-gray">Submit only</span></td></tr>
-        <tr><td>Admin / user management</td><td><span class="badge ba-green">Yes</span></td><td><span class="badge ba-red">No</span></td></tr>
-        <tr><td>Bulk actions on records</td><td><span class="badge ba-green">Yes</span></td><td><span class="badge ba-red">No</span></td></tr>
-        <tr><td>Master data editing</td><td><span class="badge ba-green">Full create/edit</span></td><td><span class="badge ba-gray">Read-only</span></td></tr>
+        <tr><td><span class="badge ba-a">Report Builder</span></td><td>Visual drag-and-drop — no code</td><td>Simple column-based tabular reports, quick filtering</td></tr>
+        <tr><td><span class="badge ba-t">Query Report</span></td><td>SQL query written by developer</td><td>Complex joins, aggregations, custom calculations</td></tr>
+        <tr><td><span class="badge ba-g">Script Report</span></td><td>Python code for data + optional JS for columns</td><td>Dynamic reports with complex business logic</td></tr>
+        <tr><td><span class="badge ba-m">Dashboard Chart</span></td><td>Configuration UI — no code</td><td>Visual charts: bar, line, pie, doughnut, heatmap</td></tr>
       </tbody>
     </table></div>
 
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 4</h3>
-      <div class="quiz-q"><p>You need to check who edited a record and when. Where do you look in Frappe Desk?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A separate audit log DocType in the module</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>The Timeline section at the bottom of the record in Form View</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>System Settings → Logs</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. Every record's Timeline shows every edit, comment, and workflow transition.</div>
-        <div class="quiz-fb bad">✗ The Timeline at the bottom of every record in Form View holds the complete audit trail.</div>
-      </div>
-    </div>
+    <h2>Desk vs Mobile App</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Feature</th><th>Frappe Desk</th><th>Mobile App</th></tr></thead>
+      <tbody>
+        <tr><td>Works offline</td><td><span class="badge ba-r">No</span></td><td><span class="badge ba-g">Yes — fully offline</span></td></tr>
+        <tr><td>Reports & Export</td><td><span class="badge ba-g">Yes — CSV, Excel</span></td><td><span class="badge ba-r">No</span></td></tr>
+        <tr><td>Approval workflow actions</td><td><span class="badge ba-g">Full — Approve/Reject/Send Back</span></td><td><span class="badge ba-n">Submit only</span></td></tr>
+        <tr><td>Admin tasks</td><td><span class="badge ba-g">Yes</span></td><td><span class="badge ba-r">No</span></td></tr>
+        <tr><td>Bulk operations</td><td><span class="badge ba-g">Yes — multi-select</span></td><td><span class="badge ba-r">No</span></td></tr>
+        <tr><td>Master data editing</td><td><span class="badge ba-g">Full CRUD</span></td><td><span class="badge ba-n">Read-only</span></td></tr>
+        <tr><td>Dashboard charts</td><td><span class="badge ba-g">Yes</span></td><td><span class="badge ba-r">No</span></td></tr>
+      </tbody>
+    </table></div>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch3.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">mForm → Frappe Mapping</div></div></a>
-      <a href="ch5.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">The Mobile App</div></div></a>
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 4</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 4</div><p>Where do you look to see the complete edit history of a Frappe record?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The System Settings page</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>The Timeline section at the bottom of the Form View</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A separate Audit Log DocType</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>The user's profile page</div></div><div class="quiz-fb ok">✓ Correct! Every record's Timeline shows every edit, comment, workflow transition, email sent, and more.</div><div class="quiz-fb bad">✗ The Timeline at the bottom of every Form View is the complete, immutable audit trail for that record.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 4</div><p>What is a Frappe 'Workspace'?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A separate database for each department</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A customizable landing page for a module with shortcuts, charts, and summaries</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>The main code directory for a Frappe App</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>A type of report</div></div><div class="quiz-fb ok">✓ Correct! A Workspace is a customizable homepage for a module — contains shortcuts, summary numbers, and charts.</div><div class="quiz-fb bad">✗ Workspaces are customizable dashboards for modules, not databases or code directories.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 4</div><p>What is the difference between a Query Report and a Script Report in Frappe?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>They are the same thing</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Query Report uses SQL; Script Report uses Python for complex business logic</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Query Report is for mobile; Script Report is for desktop</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Script Reports can only show charts; Query Reports show tables</div></div><div class="quiz-fb ok">✓ Correct! Query Reports use SQL for database queries; Script Reports use Python for complex business logic.</div><div class="quiz-fb bad">✗ Query = SQL written by a developer. Script = Python code. Both output tabular data, but Script Reports allow more complex logic.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 4</div><p>Can you edit a record on Frappe Desk after it has been Submitted?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Yes, freely — submission doesn't lock anything</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>No, never — submitted records are immutable</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>Only through the Amendment process, which creates a new version</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Only administrators can edit submitted records</div></div><div class="quiz-fb ok">✓ Correct! Submitted records are locked. To edit, you Amend — creating a new version while preserving the original.</div><div class="quiz-fb bad">✗ Submitted records are locked. The Amendment process creates a new editable version, preserving the original for audit.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
     </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch3.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Building Forms</div></div></a><a href="ch5.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Scripts & Validation</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch4');</script>
-</body>
-</html>
+<script>init('ch4');</script>
+</body></html>
