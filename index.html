@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Welcome · Frappe Guide</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<button class="mob-toggle" id="mob-toggle">☰</button>
+
+<!-- SIDEBAR -->
+<aside class="sb" id="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">🌿</div>
+    <div>
+      <div class="sb-logo-name">Frappe Guide</div>
+      <div class="sb-logo-sub">Dhwani RIS · Product Team</div>
+    </div>
+  </a>
+  <div class="sb-scroll" id="sb-nav"><!-- built by JS --></div>
+  <div class="sb-footer">
+    <div class="sb-progress-label">
+      <span>Progress</span>
+      <span id="sb-prog-done">0 / 7</span>
+    </div>
+    <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
+    <div class="sb-built">Built by Nihaan Mohammed · 2026</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-crumb">
+      <a href="index.html">Frappe Guide</a>
+      <span class="topbar-sep"> › </span>
+    </span>
+    <span class="topbar-current">Welcome</span>
+    <div class="topbar-right">
+      <span class="topbar-progress" id="top-prog">0 / 7 chapters</span>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+
+    <div class="hero">
+      <div class="hero-eyebrow">📘 7 Chapters · Interactive Guide · mForm → Frappe</div>
+      <h1>Learn <em>Frappe</em><br>The easy way.</h1>
+      <p>A practical guide for the Dhwani RIS product team migrating from mForm to Frappe. Plain English, real examples, interactive quizzes.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Non-technical</span>
+        <span class="hero-tag">7 Chapters</span>
+        <span class="hero-tag">Interactive quizzes</span>
+        <span class="hero-tag">Progress tracking</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-v">7</div><div class="stat-l">Chapters</div></div>
+      <div class="stat"><div class="stat-v">76</div><div class="stat-l">DocTypes in SNF</div></div>
+      <div class="stat"><div class="stat-v">30+</div><div class="stat-l">Field Types Covered</div></div>
+      <div class="stat"><div class="stat-v">3</div><div class="stat-l">Sync Types Explained</div></div>
+    </div>
+
+    <h2>All Chapters</h2>
+    <div class="cards">
+      <a href="ch1.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-blue">🗺️</div><div class="card-title">Ch 1 · System Overview</div></div>
+          <p>The three layers, key vocabulary — DocType, Document, Module, Child Table — and how everything connects.</p>
+        </div>
+      </a>
+      <a href="ch2.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-teal">🧱</div><div class="card-title">Ch 2 · How Forms Are Built</div></div>
+          <p>All field types, child tables, cascading dropdowns, conditional visibility, and the three script layers.</p>
+        </div>
+      </a>
+      <a href="ch3.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-amber">🔄</div><div class="card-title">Ch 3 · mForm → Frappe Mapping</div></div>
+          <p>Your decoder ring. Every mForm concept — question types, skip logic, validations — translated to Frappe.</p>
+        </div>
+      </a>
+      <a href="ch4.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-green">🖥️</div><div class="card-title">Ch 4 · The Web Side</div></div>
+          <p>Frappe Desk — List View, Form View, approval workflows, timeline, and data export.</p>
+        </div>
+      </a>
+      <a href="ch5.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-purple">📱</div><div class="card-title">Ch 5 · The Mobile App</div></div>
+          <p>Field worker experience, how offline truly works, dirty vs clean records, the SDK engine.</p>
+        </div>
+      </a>
+      <a href="ch6.html" style="text-decoration:none">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-amber">⚡</div><div class="card-title">Ch 6 · Data Flow & Sync</div></div>
+          <p>Push sync, pull sync, schema sync — dependency ordering and what happens when things go wrong.</p>
+        </div>
+      </a>
+      <a href="ch7.html" style="text-decoration:none" style="grid-column:1/-1">
+        <div class="card" style="cursor:pointer;transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'" onmouseout="this.style.boxShadow=''">
+          <div class="card-head"><div class="card-ico ci-teal">📋</div><div class="card-title">Ch 7 · Form & Module Reference (SNF)</div></div>
+          <p>All 76 DocTypes in the SNF project, the module map, geography hierarchy, and dependency ordering.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon">💡</span>
+      <div>
+        <strong>How to use this guide</strong>
+        <p>New to Frappe? Start at Chapter 1 and read in order. Already know mForm? Jump to Chapter 3 for the direct mapping. Mark chapters complete as you go — your progress is saved.</p>
+      </div>
+    </div>
+
+
+    
+
+    <div class="page-nav">
+      <span></span>
+      <a href="ch1.html" class="pnav-btn next"><span class="arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">System Overview</div></div></a>
+    </div>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+<script>initPage('home');</script>
+</body>
+</html>
