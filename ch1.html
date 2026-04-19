@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>System Overview · Frappe Guide</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<button class="mob-toggle" id="mob-toggle">☰</button>
+
+<!-- SIDEBAR -->
+<aside class="sb" id="sidebar">
+  <a href="index.html" class="sb-logo">
+    <div class="sb-logo-mark">🌿</div>
+    <div>
+      <div class="sb-logo-name">Frappe Guide</div>
+      <div class="sb-logo-sub">Dhwani RIS · Product Team</div>
+    </div>
+  </a>
+  <div class="sb-scroll" id="sb-nav"><!-- built by JS --></div>
+  <div class="sb-footer">
+    <div class="sb-progress-label">
+      <span>Progress</span>
+      <span id="sb-prog-done">0 / 7</span>
+    </div>
+    <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
+    <div class="sb-built">Built by Nihaan Mohammed · 2026</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-crumb">
+      <a href="index.html">Frappe Guide</a>
+      <span class="topbar-sep"> › </span>
+    </span>
+    <span class="topbar-current">Chapter 1 · System Overview</span>
+    <div class="topbar-right">
+      <span class="topbar-progress" id="top-prog">0 / 7 chapters</span>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+
+    <div class="hero">
+      <div class="hero-eyebrow">🗺️ Chapter 1 of 7</div>
+      <h1>System <em>Overview</em></h1>
+      <p>What the platform is, how its three layers connect, and the six terms you must know before everything else.</p>
+      <div class="hero-tags"><span class="hero-tag">DocType</span><span class="hero-tag">Document</span><span class="hero-tag">Module</span><span class="hero-tag">3 Layers</span><span class="hero-tag">Offline</span></div>
+    </div>
+
+    <h2>The Core Idea</h2>
+    <p>Define a data collection form once on the server — it automatically works on both a <strong>web browser</strong> and the <strong>Android mobile app</strong>. Change the form on the server and both update automatically. No app store update ever needed.</p>
+
+    <div class="callout key">
+      <span class="callout-icon">🔑</span>
+      <div><strong>One definition. Two interfaces. Automatic sync.</strong>
+      <p>This is the founding principle of the entire platform.</p></div>
+    </div>
+
+    <h2>The Three Layers</h2>
+    <div class="layers">
+      <div class="layer l1">
+        <div class="layer-ico">🧠</div>
+        <div><div class="layer-name">Server — Frappe</div><div class="layer-desc">The brain. Stores form definitions, collected data, user accounts, permissions, and all business rules.</div></div>
+      </div>
+      <div class="layer l2">
+        <div class="layer-ico">🖥️</div>
+        <div><div class="layer-name">Frappe Desk — Web Interface</div><div class="layer-desc">Browser-based back office. Coordinators and admins review data, configure forms, manage users. No installation.</div></div>
+      </div>
+      <div class="layer l3">
+        <div class="layer-ico">📱</div>
+        <div><div class="layer-name">Mobile App — Android</div><div class="layer-desc">Field workers collect data. Works completely offline. Syncs to server when internet returns. Nothing lost.</div></div>
+      </div>
+    </div>
+
+    <h2>Six Terms to Know</h2>
+    <p>Learn these six terms and everything else will click into place.</p>
+
+    <div class="acc-item open">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📄</span><span class="acc-hdr-title">DocType — The Form Template</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p>A <strong>DocType</strong> is a form blueprint. It defines what fields exist, their types, which are required, the layout, who can fill it, and how records are named. Think of it as the blank form — the structure, not the data.</p>
+      <p>Example: "Household Survey" is a DocType. It defines the form structure.</p>
+      <div class="callout tip" style="margin-top:12px"><span class="callout-icon">✅</span><div><strong>mForm equivalent</strong><p>In mForm this was a Form JSON file. In Frappe it's a DocType, stored and editable on the server.</p></div></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📝</span><span class="acc-hdr-title">Document — A Filled-in Form</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p>Every time someone fills a DocType and saves, that creates one <strong>Document</strong>. 500 households surveyed = 500 Documents of the Household Survey DocType. Documents get unique IDs like HH-00001, HH-00002.</p></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📁</span><span class="acc-hdr-title">Module — A Folder of DocTypes</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p>A <strong>Module</strong> is a category grouping related DocTypes. All Shiksha Plus forms live in the "Shiksha Plus" module. All geography forms live in "Geo Master." In the Frappe Desk sidebar you navigate by module.</p></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📊</span><span class="acc-hdr-title">Child Table — A Repeating List Inside a Form</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p>A <strong>Child Table</strong> is an "Add Row" section inside a form for repeating entries. Example: Household Survey has a Family Members child table — each member is one row with name, age, gender, education.</p>
+      <div class="callout tip" style="margin-top:12px"><span class="callout-icon">✅</span><div><strong>mForm equivalent</strong><p>This replaces Looping Questions (types 20/21) in mForm.</p></div></div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📚</span><span class="acc-hdr-title">Master Data — Reference Data</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p><strong>Master Data</strong> is created once and referenced by many forms: states, districts, employees, volunteers, dropdown option lists. Must be created before transaction forms that reference it.</p></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-hdr"><span class="acc-hdr-ico">📊</span><span class="acc-hdr-title">Transaction Data — Field-Collected Data</span><span class="acc-arrow">▼</span></div>
+      <div class="acc-body"><p><strong>Transaction Data</strong> is the actual work: visit reports, attendance, assessments, surveys. These reference master data — a visit report references a volunteer, a geography, and dropdown options.</p></div>
+    </div>
+
+    <h2>How It All Connects</h2>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">1</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Admin defines a DocType on the server</h4><p>Creates the form template in Frappe Desk — adds fields, sets conditions, defines permissions.</p></div></div>
+      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">2</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Form appears instantly on Frappe Desk</h4><p>Any authorized web user can fill it in the browser immediately.</p></div></div>
+      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">3</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Admin enables the form for mobile</h4><p>In Mobile Configuration, checks the form on. The app picks it up on next sync.</p></div></div>
+      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">4</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Field workers fill the form — even offline</h4><p>Data saves locally. Syncs to server when internet returns.</p></div></div>
+      <div class="flow-step"><div class="flow-line-col"><div class="flow-dot">5</div><div class="flow-connector"></div></div><div class="flow-content"><h4>Coordinators review and approve on Desk</h4><p>See all submitted data, approve or reject, add comments, export reports.</p></div></div>
+    </div>
+
+    <h2>Smart Features That Work Everywhere</h2>
+    <div class="cards">
+      <div class="card"><div class="card-head"><div class="card-ico ci-teal">🔗</div><div class="card-title">Cascading Dropdowns</div></div><p>Select State → District list narrows automatically. Select District → Block narrows. Works identically on web and mobile.</p></div>
+      <div class="card"><div class="card-head"><div class="card-ico ci-blue">👁️</div><div class="card-title">Conditional Fields</div></div><p>Fields show/hide based on user input. "Jail Training details" only appears when Purpose = "Jail Training." Same rules on web and mobile.</p></div>
+      <div class="card"><div class="card-head"><div class="card-ico ci-amber">✨</div><div class="card-title">Auto-fill from Links</div></div><p>Select a Volunteer → their name, designation, GPS auto-populate. Reduces errors and speeds up entry.</p></div>
+      <div class="card"><div class="card-head"><div class="card-ico ci-purple">🛡️</div><div class="card-title">Three Layers of Validation</div></div><p>Simple rules in form definition. Complex rules in Server Scripts (Python). Real-time feedback via Client Scripts. Data is always checked.</p></div>
+    </div>
+
+    <div class="quiz">
+      <h3>🧠 Chapter 1 — Quick Check</h3>
+      <div class="quiz-q">
+        <p>What is a "DocType" in Frappe?</p>
+        <div class="quiz-opts">
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span> A filled-in form with data — one submission</div>
+          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span> A form template — the blank structure that defines what fields exist</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span> A folder that groups related forms together</div>
+        </div>
+        <div class="quiz-fb ok">✅ Correct! A DocType is the template. Each filled submission creates a separate Document.</div>
+        <div class="quiz-fb bad">❌ A DocType is the form template (blank structure). A filled-in submission is called a Document.</div>
+      </div>
+      <div class="quiz-q">
+        <p>If an admin changes a form on the server, what happens to the mobile app?</p>
+        <div class="quiz-opts">
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span> Nothing — the app must be updated from the Play Store</div>
+          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span> The app downloads the updated form definition automatically on next sync</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span> Only web users see the change</div>
+        </div>
+        <div class="quiz-fb ok">✅ Correct! Form changes propagate to the app automatically. No Play Store update ever required.</div>
+        <div class="quiz-fb bad">❌ The app downloads updated form definitions automatically on sync. No Play Store update needed.</div>
+      </div>
+    </div>
+
+
+    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
+
+    <div class="page-nav">
+      <a href="index.html" class="pnav-btn"><span class="arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Welcome</div></div></a>
+      <a href="ch2.html" class="pnav-btn next"><span class="arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">How Forms Are Built</div></div></a>
+    </div>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+<script>initPage('ch1');</script>
+</body>
+</html>
