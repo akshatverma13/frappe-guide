@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How Forms Are Built · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DocTypes & Data Model · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,121 +24,152 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 2</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
       <div class="hero-pill">🧱 Chapter 2 of 7</div>
-      <h1>How Forms <span>Are Built</span></h1>
-      <p>Field types, child tables, cascading dropdowns, conditional visibility, and the three script layers explained in full.</p>
-      <div class="hero-tags"><span class="hero-tag">Field Types</span><span class="hero-tag">Child Tables</span><span class="hero-tag">Conditions</span><span class="hero-tag">Scripts</span></div>
+      <h1>DocTypes &amp; <em>Data Model</em></h1>
+      <p>The anatomy of a DocType, every field type, child tables, naming rules, and the master vs transaction data pattern.</p>
+      <div class="hero-tags"><span class="hero-tag">All Field Types</span><span class="hero-tag">Child Tables</span><span class="hero-tag">Naming Rules</span><span class="hero-tag">Master Data</span></div>
     </div>
 
-    <h2>Field Types — Full Reference</h2>
+    <h2>Anatomy of a DocType</h2>
+    <p>A DocType is the blueprint for a data collection form. It contains everything Frappe needs to build the form, the database table, and the API:</p>
+    <div class="cards three">
+      <div class="card"><div class="ch"><div class="ci ci-a">📋</div><div class="ct">Fields</div></div><p>Types, labels, required status, default values, description, and field-level options.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-t">📐</div><div class="ct">Layout</div></div><p>Section Breaks, Tab Breaks, and Column Breaks control visual grouping and arrangement.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-g">🔒</div><div class="ct">Permissions</div></div><p>Which roles can Read, Create, Write, Delete, Submit, Cancel, or Amend records.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-m">🏷️</div><div class="ct">Naming Rule</div></div><p>How each record gets its unique ID — auto-increment, user-defined, or formula-based.</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-p">⚙️</div><div class="ct">Settings</div></div><p>Is Submittable? Is a Child Table? Has Timeline? Editable after Submit? Track Changes?</p></div>
+      <div class="card"><div class="ch"><div class="ci ci-r">📎</div><div class="ct">Links & Actions</div></div><p>Links to other DocTypes shown in the sidebar. Custom buttons and quick-action menu items.</p></div>
+    </div>
+
+    <h2>All Field Types</h2>
     <div class="tabs"><div class="tab-btns">
       <button class="tab-btn active">Text & Numbers</button>
-      <button class="tab-btn">Selection</button>
-      <button class="tab-btn">Layout</button>
-      <button class="tab-btn">Files & Other</button>
+      <button class="tab-btn">Selection & Links</button>
+      <button class="tab-btn">Date, File & Geo</button>
+      <button class="tab-btn">Layout Elements</button>
+      <button class="tab-btn">Advanced</button>
     </div>
-    <div class="tab-pane active"><div class="fld-grid">
-      <div class="fld-card"><div class="fld-name">Data</div><div class="fld-desc">Single line — names, IDs, short text</div></div>
-      <div class="fld-card"><div class="fld-name">Small Text</div><div class="fld-desc">Multi-line, shorter entries</div></div>
-      <div class="fld-card"><div class="fld-name">Long Text</div><div class="fld-desc">Multi-line, longer entries</div></div>
-      <div class="fld-card"><div class="fld-name">Int</div><div class="fld-desc">Whole numbers — counts</div></div>
-      <div class="fld-card"><div class="fld-name">Float</div><div class="fld-desc">Decimals — percentages, scores</div></div>
-      <div class="fld-card"><div class="fld-name">Percent</div><div class="fld-desc">Percentage values 0–100</div></div>
-      <div class="fld-card"><div class="fld-name">Date</div><div class="fld-desc">Date picker — day/month/year</div></div>
-      <div class="fld-card"><div class="fld-name">Datetime</div><div class="fld-desc">Date plus time</div></div>
-      <div class="fld-card"><div class="fld-name">Check</div><div class="fld-desc">A single yes/no checkbox</div></div>
+    <div class="tab-pane active"><div class="ft-grid">
+      <div class="ft-item"><div class="ft-name">Data</div><div class="ft-desc">Single line of text. Names, IDs, short answers. Max 140 chars by default.</div></div>
+      <div class="ft-item"><div class="ft-name">Small Text</div><div class="ft-desc">Multi-line text, shorter entries. Rendered as textarea.</div></div>
+      <div class="ft-item"><div class="ft-name">Long Text</div><div class="ft-desc">Multi-line text for longer content. No character limit.</div></div>
+      <div class="ft-item"><div class="ft-name">Text Editor</div><div class="ft-desc">Rich text (WYSIWYG) editor with formatting support.</div></div>
+      <div class="ft-item"><div class="ft-name">Markdown</div><div class="ft-desc">Markdown-formatted text with preview rendering.</div></div>
+      <div class="ft-item"><div class="ft-name">Int</div><div class="ft-desc">Whole numbers. Counts, quantities, scores.</div></div>
+      <div class="ft-item"><div class="ft-name">Float</div><div class="ft-desc">Decimal numbers. Percentages, measurements.</div></div>
+      <div class="ft-item"><div class="ft-name">Currency</div><div class="ft-desc">Monetary values with locale-aware formatting.</div></div>
+      <div class="ft-item"><div class="ft-name">Percent</div><div class="ft-desc">Percentage value, stored as a float (0–100).</div></div>
+      <div class="ft-item"><div class="ft-name">Check</div><div class="ft-desc">A single yes/no boolean checkbox. Stored as 0 or 1.</div></div>
+      <div class="ft-item"><div class="ft-name">Phone</div><div class="ft-desc">Phone number with international format support.</div></div>
+      <div class="ft-item"><div class="ft-name">Password</div><div class="ft-desc">Masked text entry. Stored encrypted in database.</div></div>
     </div></div>
-    <div class="tab-pane"><div class="fld-grid">
-      <div class="fld-card"><div class="fld-name">Select</div><div class="fld-desc">Fixed dropdown hardcoded in the field. Use for small stable lists (e.g., Gender).</div></div>
-      <div class="fld-card"><div class="fld-name">Link</div><div class="fld-desc">Dropdown from another DocType. Use for large or growing lists (e.g., State, Volunteer).</div></div>
-      <div class="fld-card"><div class="fld-name">Table</div><div class="fld-desc">Embeds a child table — repeating "Add Row" section.</div></div>
-      <div class="fld-card"><div class="fld-name">Table MultiSelect</div><div class="fld-desc">Multi-select linked to another DocType.</div></div>
-      <div class="fld-card"><div class="fld-name">Geolocation</div><div class="fld-desc">GPS coordinates. Mobile captures device location.</div></div>
+    <div class="tab-pane"><div class="ft-grid">
+      <div class="ft-item"><div class="ft-name">Select</div><div class="ft-desc">Dropdown with fixed choices hardcoded in the field definition. Best for small, stable lists.</div></div>
+      <div class="ft-item"><div class="ft-name">Link</div><div class="ft-desc">Dropdown that pulls records from another DocType. Has autocomplete search. Enforces referential integrity.</div></div>
+      <div class="ft-item"><div class="ft-name">Dynamic Link</div><div class="ft-desc">Link to any DocType — the target DocType is determined by another field's value.</div></div>
+      <div class="ft-item"><div class="ft-name">Table</div><div class="ft-desc">Embeds a child table — a repeating "Add Row" grid inside the parent form.</div></div>
+      <div class="ft-item"><div class="ft-name">Table MultiSelect</div><div class="ft-desc">Multi-select that stores multiple linked values from another DocType.</div></div>
+      <div class="ft-item"><div class="ft-name">Autocomplete</div><div class="ft-desc">Free-text input with suggestions fetched from a Link field's options.</div></div>
     </div>
-    <div class="callout info" style="margin-top:12px"><span class="callout-icon">💡</span><div class="callout-body"><strong>Select vs Link</strong><p>Use <strong>Select</strong> for small stable lists (Gender). Use <strong>Link</strong> when the list might grow or is shared across forms — new options added without touching any form definition.</p></div></div>
+    <div class="callout info"><span class="callout-ico">💡</span><div class="callout-body"><strong>Select vs Link</strong><p><strong>Select</strong> for short, stable lists hardcoded in the field (e.g., Gender). <strong>Link</strong> for lists that may grow or are shared across forms — new options are added as records in the linked DocType, no form editing required.</p></div></div>
     </div>
-    <div class="tab-pane"><div class="fld-grid">
-      <div class="fld-card"><div class="fld-name">Section Break</div><div class="fld-desc">New visual card/block. Can have a title. Can be collapsible.</div></div>
-      <div class="fld-card"><div class="fld-name">Tab Break</div><div class="fld-desc">New tab at the top — like pages within a long form.</div></div>
-      <div class="fld-card"><div class="fld-name">Column Break</div><div class="fld-desc">Arranges next fields side-by-side.</div></div>
-      <div class="fld-card"><div class="fld-name">HTML</div><div class="fld-desc">Displays formatted text or content.</div></div>
+    <div class="tab-pane"><div class="ft-grid">
+      <div class="ft-item"><div class="ft-name">Date</div><div class="ft-desc">Date picker — stores as YYYY-MM-DD in the database.</div></div>
+      <div class="ft-item"><div class="ft-name">Datetime</div><div class="ft-desc">Date + time picker. Stored as YYYY-MM-DD HH:MM:SS.</div></div>
+      <div class="ft-item"><div class="ft-name">Time</div><div class="ft-desc">Time-only picker. Stored as HH:MM:SS.</div></div>
+      <div class="ft-item"><div class="ft-name">Duration</div><div class="ft-desc">Time duration (hours, minutes, seconds) with a visual picker.</div></div>
+      <div class="ft-item"><div class="ft-name">Attach</div><div class="ft-desc">File upload. Any file type. Stored on server, URL saved in the field.</div></div>
+      <div class="ft-item"><div class="ft-name">Attach Image</div><div class="ft-desc">Image upload. On mobile, can open camera directly. Preview shown inline.</div></div>
+      <div class="ft-item"><div class="ft-name">Geolocation</div><div class="ft-desc">GPS coordinates stored as JSON with lat/lng/altitude. On mobile, captures device location.</div></div>
+      <div class="ft-item"><div class="ft-name">Rating</div><div class="ft-desc">Star rating widget (1–5 stars). Stored as integer.</div></div>
     </div></div>
-    <div class="tab-pane"><div class="fld-grid">
-      <div class="fld-card"><div class="fld-name">Attach</div><div class="fld-desc">File upload — any type</div></div>
-      <div class="fld-card"><div class="fld-name">Attach Image</div><div class="fld-desc">Photo upload. Mobile opens camera.</div></div>
-      <div class="fld-card"><div class="fld-name">Rating</div><div class="fld-desc">Star rating (1–5)</div></div>
-      <div class="fld-card"><div class="fld-name">Read Only</div><div class="fld-desc">Display only — user cannot edit.</div></div>
-      <div class="fld-card"><div class="fld-name">Button</div><div class="fld-desc">Triggers a server-side action.</div></div>
+    <div class="tab-pane"><div class="ft-grid">
+      <div class="ft-item"><div class="ft-name">Section Break</div><div class="ft-desc">Starts a new visual card/block. Can have a label. Can be collapsible. Groups fields visually.</div></div>
+      <div class="ft-item"><div class="ft-name">Column Break</div><div class="ft-desc">Splits the section into side-by-side columns. The next fields appear in a new column.</div></div>
+      <div class="ft-item"><div class="ft-name">Tab Break</div><div class="ft-desc">Creates a new tab at the top of the form — like pages within a long form.</div></div>
+      <div class="ft-item"><div class="ft-name">HTML</div><div class="ft-desc">Displays formatted HTML content, images, or embedded elements on the form.</div></div>
+      <div class="ft-item"><div class="ft-name">Fold</div><div class="ft-desc">Everything after this field is hidden until the user clicks "Show more".</div></div>
+      <div class="ft-item"><div class="ft-name">Heading</div><div class="ft-desc">A non-input heading text displayed inside the form for visual organization.</div></div>
+    </div></div>
+    <div class="tab-pane"><div class="ft-grid">
+      <div class="ft-item"><div class="ft-name">Read Only</div><div class="ft-desc">Displays a computed or fetched value. User cannot edit. Used for auto-calculated fields.</div></div>
+      <div class="ft-item"><div class="ft-name">Button</div><div class="ft-desc">A clickable button that triggers a client-side or server-side action.</div></div>
+      <div class="ft-item"><div class="ft-name">Barcode</div><div class="ft-desc">Barcode/QR code scanner. On mobile, opens the device camera.</div></div>
+      <div class="ft-item"><div class="ft-name">Color</div><div class="ft-desc">Color picker widget. Stores as hex color string.</div></div>
+      <div class="ft-item"><div class="ft-name">Icon</div><div class="ft-desc">Icon selector from the Frappe icon library.</div></div>
+      <div class="ft-item"><div class="ft-name">Signature</div><div class="ft-desc">Signature capture widget. Stores as base64 image.</div></div>
     </div></div></div>
 
-    <h2>Child Tables — Forms Inside Forms</h2>
-    <p>When a form needs a repeating list, use a Child Table. It appears as an "Add Row" section where users add multiple entries.</p>
-    <div class="card" style="margin-top:12px">
-      <div class="card-head"><div class="card-ico ci-green">📊</div><div class="card-title">Example: Household Survey → Family Members</div></div>
+    <h2>Child Tables — Repeating Data Inside Forms</h2>
+    <p>When a form needs a <strong>list of items</strong>, use a Child Table. It appears as an "Add Row" section where users add multiple entries, each with their own fields.</p>
+
+    <div class="card">
+      <div class="ch"><div class="ci ci-g">📊</div><div class="ct">Example: Household Survey → Family Members</div></div>
       <div class="tbl" style="margin-top:12px"><table>
-        <thead><tr><th>#</th><th>Name</th><th>Age</th><th>Gender</th><th>Education</th><th>Reading</th></tr></thead>
+        <thead><tr><th>#</th><th>Name</th><th>Age</th><th>Gender</th><th>Education</th><th>Reading</th><th>Writing</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>Ramesh Kumar</td><td>42</td><td>Male</td><td>Primary</td><td>Yes</td></tr>
-          <tr><td>2</td><td>Sunita Kumar</td><td>38</td><td>Female</td><td>Illiterate</td><td>No</td></tr>
-          <tr><td>3</td><td>Priya Kumar</td><td>14</td><td>Female</td><td>Secondary</td><td>Yes</td></tr>
+          <tr><td>1</td><td>Ramesh Kumar</td><td>42</td><td>Male</td><td>Primary</td><td><span class="badge ba-g">Yes</span></td><td><span class="badge ba-g">Yes</span></td></tr>
+          <tr><td>2</td><td>Sunita Kumar</td><td>38</td><td>Female</td><td>Illiterate</td><td><span class="badge ba-r">No</span></td><td><span class="badge ba-r">No</span></td></tr>
+          <tr><td>3</td><td>Priya</td><td>14</td><td>Female</td><td>Secondary</td><td><span class="badge ba-g">Yes</span></td><td><span class="badge ba-g">Yes</span></td></tr>
         </tbody>
       </table></div>
-      <p style="margin-top:8px;font-size:12px;color:var(--light)">Each row saves with the parent form. Rows can be added, edited, reordered, or deleted.</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--light)">Each row is one record in the Family Member child DocType. All rows save with the parent form. Rows can be added, edited, reordered, and deleted.</p>
     </div>
 
-    <h2>How Fields Connect</h2>
-    <div class="acc-item open"><div class="acc-hdr"><span class="acc-hdr-ico">🔗</span><span class="acc-hdr-title">Cascading Dropdowns</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>Selecting a State narrows the District list. Selecting District narrows Block. Applies to any dependent pair.</p>
-    <div style="display:flex;align-items:center;gap:8px;background:var(--bg2);padding:12px;border-radius:var(--r-sm);margin-top:10px;flex-wrap:wrap">
-      <span style="background:var(--indigo);color:white;padding:4px 12px;border-radius:4px;font-size:12px;font-weight:500">Maharashtra</span>
-      <span style="color:var(--light)">→</span>
-      <span style="background:var(--indigo-light);color:var(--indigo);padding:4px 12px;border-radius:4px;font-size:12px;border:1px solid var(--indigo-mid)">Pune ▾</span>
-      <span style="color:var(--light)">→</span>
-      <span style="background:var(--teal-light);color:var(--teal);padding:4px 12px;border-radius:4px;font-size:12px;border:1px solid #99F6E4">Haveli ▾</span>
-    </div></div></div>
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">✨</span><span class="acc-hdr-title">Auto-fill (Fetch From)</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>Select a Volunteer → their name, designation, and GPS auto-populate. Auto-filled fields are read-only. Defined once, works on web and mobile.</p></div></div>
-    <div class="acc-item"><div class="acc-hdr"><span class="acc-hdr-ico">👁️</span><span class="acc-hdr-title">Conditional Visibility (Depends On)</span><span class="acc-arrow">▼</span></div>
-    <div class="acc-body"><p>Each field has a self-contained "depends on" expression. The field shows only when the condition is true.</p>
-    <div style="background:var(--bg2);border-radius:var(--r-sm);padding:12px;margin-top:10px"><code>doc.purpose_of_visit == "Training"</code><p style="margin-top:6px;font-size:12.5px">→ Training section only appears when Purpose = Training.</p></div></div></div>
+    <div class="callout tip"><span class="callout-ico">✅</span><div class="callout-body"><strong>Key Rule: Child Tables cannot exist alone</strong><p>A Child Table DocType is marked "Is Child Table" — it can only exist inside a parent form's Table field. It never has its own List View.</p></div></div>
 
-    <h2>The Three Script Layers</h2>
+    <h2>Naming Rules — How Records Get Their IDs</h2>
     <div class="tbl"><table>
-      <thead><tr><th>Layer</th><th>Where It Runs</th><th>What It Does</th><th>Developer?</th></tr></thead>
+      <thead><tr><th>Naming Type</th><th>Example</th><th>When to Use</th></tr></thead>
       <tbody>
-        <tr><td><span class="badge ba-indigo">Server Script (Python)</span></td><td>Server, every save</td><td>Complex validation: date ranges, numeric limits, enforcing conditional required fields. The safety net.</td><td>Python dev</td></tr>
-        <tr><td><span class="badge ba-teal">Web Client Script (JS)</span></td><td>Browser only</td><td>Real-time calculations, custom dropdown filtering. Web only — not mobile.</td><td>JS dev</td></tr>
-        <tr><td><span class="badge ba-purple">Mobile Handler (Dart)</span></td><td>App only</td><td>Same real-time behaviour for mobile: calculations, on-validate checks. Mobile only.</td><td>Flutter dev</td></tr>
+        <tr><td><span class="badge ba-a">Auto-increment Series</span></td><td>HH-00001, SPDVR-00042</td><td>Transaction data — needs a unique, readable ID</td></tr>
+        <tr><td><span class="badge ba-t">Set by User</span></td><td>Maharashtra, Pune, English</td><td>Master data where the name IS the identifier</td></tr>
+        <tr><td><span class="badge ba-g">Expression</span></td><td>EMP-2024-0001</td><td>IDs that include date, category, or other fields</td></tr>
+        <tr><td><span class="badge ba-m">UUID</span></td><td>ab3f8c12-...</td><td>When human-readable IDs are not needed</td></tr>
+        <tr><td><span class="badge ba-p">Based on Field</span></td><td>Uses the value of a specific field</td><td>When one field uniquely identifies the record</td></tr>
       </tbody>
     </table></div>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div class="callout-body"><strong>When do you need a developer?</strong><p><strong>No dev needed:</strong> Add field, change label, add dropdown option, set default value.<br><strong>Dev required:</strong> New validation rule, auto-calculation, custom dropdown filtering.</p></div></div>
 
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 2</h3>
-      <div class="quiz-q"><p>Training Topics might grow over time and are used in 3 different forms. Which field type?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Select — hardcode options in each field</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Link — pointing to a Training Topic Option Master DocType</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Check — a yes/no checkbox</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. Link to an Option Master means adding topics without touching any form definition.</div>
-        <div class="quiz-fb bad">✗ Use Link to an Option Master — new options can be added by admins without any developer involvement.</div>
+    <h2>Master Data vs Transaction Data</h2>
+    <div class="compare">
+      <div class="cmp-col">
+        <div class="cmp-hdr mf">📚 Master Data</div>
+        <div class="cmp-row"><strong>What it is</strong>Reference data, created once and rarely changed</div>
+        <div class="cmp-row"><strong>Examples</strong>State, District, Employee, Volunteer, Education Level</div>
+        <div class="cmp-row"><strong>Created by</strong>Administrators during setup</div>
+        <div class="cmp-row"><strong>Used by</strong>Transaction forms that Link to it</div>
+        <div class="cmp-row"><strong>Must exist first</strong>Yes — referenced by transaction forms</div>
+      </div>
+      <div class="cmp-col">
+        <div class="cmp-hdr fr">⚡ Transaction Data</div>
+        <div class="cmp-row"><strong>What it is</strong>Field-collected data, created frequently</div>
+        <div class="cmp-row"><strong>Examples</strong>Daily Visit Report, Attendance, Household Survey</div>
+        <div class="cmp-row"><strong>Created by</strong>Field workers on the mobile app</div>
+        <div class="cmp-row"><strong>Used by</strong>Reports, dashboards, approvals</div>
+        <div class="cmp-row"><strong>Must exist first</strong>No — references master data</div>
       </div>
     </div>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch1.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">System Overview</div></div></a>
-      <a href="ch3.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">mForm → Frappe Mapping</div></div></a>
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 4</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 4</div><p>Which Frappe field type should you use for a dropdown that links to a list that might grow over time?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Select — hardcode the options in the field definition</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>Check — a yes/no checkbox</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>Link — pointing to another DocType whose records are the options</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Data — a text field</div></div><div class="quiz-fb ok">✓ Correct! Link to another DocType means adding options is as simple as creating new records — no form editing required.</div><div class="quiz-fb bad">✗ Use Link when the list might grow. Select is only for small, stable lists hardcoded in the field definition.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 4</div><p>What is a Child Table in Frappe?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>A separate database table with no connection to a parent</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A DocType marked as a child that can only exist inside a parent form's Table field</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>A table visible in the List View sidebar</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>A SQL join table created manually</div></div><div class="quiz-fb ok">✓ Correct! A Child Table only exists inside a parent form's Table field and cannot be accessed independently.</div><div class="quiz-fb bad">✗ A Child Table is marked 'Is Child Table' and can only exist as a Table field inside a parent form.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 4</div><p>What happens to the MariaDB database when you add a field to an existing DocType?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Nothing — you must write a SQL ALTER TABLE statement manually</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>The database is dropped and recreated</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>Frappe automatically adds the new column to the database table</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>You need to run bench migrate manually</div></div><div class="quiz-fb ok">✓ Correct! Frappe handles the database migration automatically when you save the DocType.</div><div class="quiz-fb bad">✗ Frappe automatically alters the database table. However, you do need bench migrate after changing DocType fixtures — but for in-app changes, it's automatic.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 4</div><p>What is 'Master Data' in the context of Frappe?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Data entered by field workers in the field</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Reference data created once and referenced by transaction forms</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Data that has been submitted and approved</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>System configuration settings</div></div><div class="quiz-fb ok">✓ Correct! Master data (geography, employees, options) must exist before transaction forms that reference it.</div><div class="quiz-fb bad">✗ Master data is reference data like geography, employees, and option lists — created first, referenced by transaction forms.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
     </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch1.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Introduction to Frappe</div></div></a><a href="ch3.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Building Forms</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch2');</script>
-</body>
-</html>
+<script>init('ch2');</script>
+</body></html>
