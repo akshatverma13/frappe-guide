@@ -1,29 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Mobile App · Frappe Learning Guide</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scripts & Validation · Frappe Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
-    <div class="sb-logo-mark">🌿</div>
-    <div>
-      <div class="sb-logo-name">Frappe Learning Guide</div>
-      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
-    </div>
+    <div class="sb-mark">🌿</div>
+    <div><div class="sb-name">Frappe Learning Guide</div><div class="sb-sub">Product Team · Dhwani RIS</div></div>
   </a>
   <div class="sb-scroll" id="sb-nav"></div>
-  <div class="sb-footer">
-    <div class="sb-prog-row">
-      <span class="sb-prog-label">Your Progress</span>
-      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
-    </div>
+  <div class="sb-foot">
+    <div class="sb-prog-row"><span class="sb-prog-lbl">Progress</span><span class="sb-prog-val" id="sb-pval">0 / 7</span></div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
+    <div class="sb-credit">Made by Product Team</div>
   </div>
 </aside>
 <main class="main">
@@ -31,94 +24,150 @@
     <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
     <span class="tb-cur">Chapter 5</span>
     <div class="tb-right">
-      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="tb-prog" id="top-prog">Progress: <span>0 / 7</span></span>
+      <span class="theme-icon" id="theme-icon">🌙</span>
+      <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme"></button>
     </div>
   </div>
   <div class="page">
 
     <div class="hero">
-      <div class="hero-pill">📱 Chapter 5 of 7</div>
-      <h1>The Mobile <span>App</span></h1>
-      <p>Field worker experience. How offline truly works. Dirty vs clean records. The SDK engine that renders every form dynamically.</p>
-      <div class="hero-tags"><span class="hero-tag">Offline</span><span class="hero-tag">SDK Engine</span><span class="hero-tag">Record Status</span><span class="hero-tag">Flutter</span></div>
-    </div>
-    <div class="callout key"><span class="callout-icon">🔑</span><div class="callout-body"><strong>True Offline Capability</strong><p>Fill forms and save with zero internet. Data stores locally on the device and syncs to the server when connectivity returns. No data loss. No time limit.</p></div></div>
-
-    <h2>App Architecture</h2>
-    <div class="cards">
-      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">🏠</div><div class="card-title">App Shell</div></div><p>Lightweight outer layer. Provides branding, project config, and client-specific form handlers. Different per project.</p></div>
-      <div class="card"><div class="card-head"><div class="card-ico ci-purple">⚙️</div><div class="card-title">SDK Engine</div></div><p>The heavy lifter: reads DocType definitions, renders forms as native screens, stores data locally (SQLite), syncs with server, manages auth tokens. Shared across all projects.</p></div>
-    </div>
-    <div class="callout info"><span class="callout-icon">💡</span><div class="callout-body"><strong>No form is hardcoded in the app</strong><p>Every form is built dynamically from the server's DocType definition. Form changes on the server update the app automatically on next sync.</p></div></div>
-
-    <h2>Login — Step by Step</h2>
-    <div class="flow">
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">1</div><div class="flow-line"></div></div><div class="flow-content"><h4>App checks if mobile service is enabled</h4><p>Quick server check, no credentials needed. Shows message and stops if disabled.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">2</div><div class="flow-line"></div></div><div class="flow-content"><h4>User enters credentials</h4><p>Username/password or mobile + OTP. On success: auth tokens (30-day validity), enabled forms list, permissions, language preference.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">3</div><div class="flow-line"></div></div><div class="flow-content"><h4>Initial sync downloads everything needed</h4><p>All form definitions, existing records, and translations for the user's language.</p></div></div>
-      <div class="flow-step"><div class="flow-col"><div class="flow-dot">4</div><div class="flow-line"></div></div><div class="flow-content"><h4>App is ready — internet can be switched off</h4><p>All data for offline work is stored locally. The user is fully self-sufficient.</p></div></div>
+      <div class="hero-pill">⚡ Chapter 5 of 7</div>
+      <h1>Scripts &amp; <em>Validation</em></h1>
+      <p>Server Scripts (Python), Client Scripts (JavaScript), Frappe Hooks, the REST API, and building custom Frappe Apps.</p>
+      <div class="hero-tags"><span class="hero-tag">Python</span><span class="hero-tag">JavaScript</span><span class="hero-tag">Hooks</span><span class="hero-tag">REST API</span><span class="hero-tag">Custom Apps</span></div>
     </div>
 
-    <h2>Record Status</h2>
+    <h2>The Three Script Layers</h2>
+    <p>Frappe splits business logic across three layers. Understanding which layer to use for which problem is essential:</p>
+    <div class="stack">
+      <div class="stack-layer sl-0"><div class="sl-icon">🐍</div><div><div class="sl-name">Server Script (Python)</div><div class="sl-desc">Runs on the server on every save/submit/cancel. The safety net — always executes regardless of how data arrives.</div></div></div>
+      <div class="stack-layer sl-1"><div class="sl-icon">🌐</div><div><div class="sl-name">Web Client Script (JavaScript)</div><div class="sl-desc">Runs in the browser for Frappe Desk users only. Real-time interactive behavior — calculations, filters, custom UI.</div></div></div>
+      <div class="stack-layer sl-2"><div class="sl-icon">📱</div><div><div class="sl-name">Mobile Form Handler (Dart)</div><div class="sl-desc">Runs in the Flutter app. Same real-time behavior for mobile — on_field_change, on_validate. App-only.</div></div></div>
+    </div>
+
+    <h2>Server Scripts — Python</h2>
+    <p>Server Scripts run on the Frappe server on every document event — before_save, after_save, before_submit, on_submit, etc. They are the authoritative validation layer.</p>
+
+    <div class="code-block"><span class="cm"># frappe_app/custom/validation.py</span>
+<span class="kw">import</span> frappe
+
+<span class="kw">def</span> <span class="fn">validate</span>(doc, method):
+    <span class="cm"># Cross-field validation</span>
+    <span class="kw">if</span> doc.end_date &lt; doc.start_date:
+        frappe.throw(<span class="st">"End date must be after start date"</span>)
+
+    <span class="cm"># Numeric range check</span>
+    <span class="kw">if</span> doc.attendance_count &gt; doc.total_learners:
+        frappe.throw(<span class="st">"Attendance cannot exceed total learners"</span>)
+
+    <span class="cm"># Conditional mandatory (not enforced by form definition)</span>
+    <span class="kw">if</span> doc.cms_status == <span class="st">"Running"</span> <span class="kw">and</span> <span class="kw">not</span> doc.batch_number:
+        frappe.throw(<span class="st">"Batch Number is required when CMS Status is Running"</span>)
+
+    <span class="cm"># Auto-calculation before save</span>
+    doc.total_score = doc.reading_score + doc.writing_score + doc.math_score</div>
+
+    <h2>Web Client Scripts — JavaScript</h2>
+    <p>Client Scripts run in the browser only — for Frappe Desk users. They provide real-time interactive behavior that goes beyond what the form definition can express.</p>
+
+    <div class="code-block"><span class="cm">// frappe.ui.form.on — triggered when form loads or field changes</span>
+frappe.ui.form.<span class="fn">on</span>(<span class="st">"Daily Visit Report"</span>, {
+
+    <span class="cm">// Called when form is refreshed/loaded</span>
+    <span class="fn">refresh</span>: <span class="kw">function</span>(frm) {
+        <span class="kw">if</span> (frm.doc.status === <span class="st">"Approved"</span>) {
+            frm.<span class="fn">disable_form</span>();  <span class="cm">// lock all fields</span>
+        }
+    },
+
+    <span class="cm">// Triggered when a specific field changes</span>
+    <span class="fn">reading_score</span>: <span class="kw">function</span>(frm) {
+        <span class="cm">// Recalculate total when any score changes</span>
+        frm.set_value(<span class="st">"total_score"</span>,
+            (frm.doc.reading_score || 0) +
+            (frm.doc.writing_score || 0) +
+            (frm.doc.math_score   || 0)
+        );
+    },
+
+    <span class="cm">// Custom filter on a Link field</span>
+    <span class="fn">volunteer_id</span>: <span class="kw">function</span>(frm) {
+        frm.set_query(<span class="st">"volunteer_id"</span>, <span class="kw">function</span>() {
+            <span class="kw">return</span> { filters: { village: frm.doc.village } };
+        });
+    }
+});</div>
+
+    <h2>Frappe Hooks — Event-driven Integration</h2>
+    <p>Hooks (defined in <code>hooks.py</code> of a Frappe App) let you attach Python functions to Frappe events without modifying core code:</p>
+    <div class="hook-row">
+      <div class="hook-item"><span class="hook-tag ht-b">doc_events</span><div class="hook-desc">Run functions before/after any Document event: <code>before_save</code>, <code>after_insert</code>, <code>on_submit</code>, <code>on_cancel</code>, <code>on_trash</code></div></div>
+      <div class="hook-item"><span class="hook-tag ht-g">scheduler_events</span><div class="hook-desc">Schedule functions to run daily, weekly, hourly: <code>daily</code>, <code>weekly</code>, <code>monthly</code>, <code>cron</code></div></div>
+      <div class="hook-item"><span class="hook-tag ht-p">override_whitelisted_methods</span><div class="hook-desc">Replace or extend any Frappe API endpoint with your own implementation</div></div>
+      <div class="hook-item"><span class="hook-tag ht-a">on_session_creation</span><div class="hook-desc">Run code when a user logs in — useful for loading user-specific configuration</div></div>
+      <div class="hook-item"><span class="hook-tag ht-b">fixtures</span><div class="hook-desc">Define data (DocTypes, roles, custom fields) that should be auto-installed with the app</div></div>
+    </div>
+
+    <div class="code-block"><span class="cm"># hooks.py — attach validation function to DVR DocType</span>
+doc_events = {
+    <span class="st">"Daily Visit Report"</span>: {
+        <span class="st">"validate"</span>: <span class="st">"myapp.validation.dvr.validate"</span>,
+        <span class="st">"on_submit"</span>: <span class="st">"myapp.notifications.dvr.send_approval_alert"</span>,
+    },
+    <span class="st">"*"</span>: {  <span class="cm"># runs for ALL DocTypes</span>
+        <span class="st">"after_insert"</span>: <span class="st">"myapp.audit.log_creation"</span>,
+    }
+}</div>
+
+    <h2>REST API — Built-in for Every DocType</h2>
+    <p>Frappe auto-generates REST API endpoints for every DocType. No extra code required:</p>
     <div class="tbl"><table>
-      <thead><tr><th>Status</th><th>Meaning</th><th>What Happens Next</th></tr></thead>
+      <thead><tr><th>Operation</th><th>HTTP Method</th><th>Endpoint</th></tr></thead>
       <tbody>
-        <tr><td><span class="badge ba-green">Clean</span></td><td>Fully in sync with the server</td><td>Nothing — it is up to date</td></tr>
-        <tr><td><span class="badge ba-amber">Dirty</span></td><td>Has local changes not yet uploaded</td><td>Uploads on next sync automatically</td></tr>
-        <tr><td><span class="badge ba-red">Error</span></td><td>Server rejected it during sync</td><td>User sees error, fixes it, re-saves</td></tr>
-        <tr><td><span class="badge ba-gray">Deleted</span></td><td>Marked for deletion locally</td><td>Delete request sent on next sync</td></tr>
+        <tr><td>List records</td><td><span class="badge ba-t">GET</span></td><td><code>/api/resource/DocType?filters=[[...]]&fields=[...]</code></td></tr>
+        <tr><td>Get one record</td><td><span class="badge ba-t">GET</span></td><td><code>/api/resource/DocType/record-name</code></td></tr>
+        <tr><td>Create record</td><td><span class="badge ba-g">POST</span></td><td><code>/api/resource/DocType</code></td></tr>
+        <tr><td>Update record</td><td><span class="badge ba-m">PUT</span></td><td><code>/api/resource/DocType/record-name</code></td></tr>
+        <tr><td>Delete record</td><td><span class="badge ba-r">DELETE</span></td><td><code>/api/resource/DocType/record-name</code></td></tr>
+        <tr><td>Custom method</td><td><span class="badge ba-t">GET/POST</span></td><td><code>/api/method/app.module.function</code></td></tr>
       </tbody>
     </table></div>
 
-    <h2>Online vs Offline Save</h2>
-    <div class="tabs"><div class="tab-btns">
-      <button class="tab-btn active">Saving Online</button>
-      <button class="tab-btn">Saving Offline</button>
-      <button class="tab-btn">Sync Failure</button>
-    </div>
-    <div class="tab-pane active"><ol style="line-height:2.2;font-size:13.5px">
-      <li>Data sent to server immediately</li>
-      <li>Server runs all Python validation scripts</li>
-      <li>If passes → server assigns permanent ID, record becomes <span class="badge ba-green">Clean</span></li>
-      <li>If fails → error shown to user, nothing saved</li>
-    </ol></div>
-    <div class="tab-pane"><ol style="line-height:2.2;font-size:13.5px">
-      <li>Data saved to local database on the device</li>
-      <li>App assigns a temporary local ID</li>
-      <li>Record marked <span class="badge ba-amber">Dirty</span> — needs to upload</li>
-      <li>Only mobile-side validation runs (server checks pending)</li>
-      <li>Auto-uploads when internet returns</li>
-    </ol>
-    <div class="callout tip" style="margin-top:12px"><span class="callout-icon">✅</span><div class="callout-body"><strong>User experience</strong><p>The Save button works identically online or offline. Users never need to check connectivity.</p></div></div>
-    </div>
-    <div class="tab-pane"><ol style="line-height:2.2;font-size:13.5px">
-      <li>Record stays <span class="badge ba-amber">Dirty</span> with error details stored locally</li>
-      <li>User sees which record failed and exactly why</li>
-      <li>User opens the record, fixes the issue, re-saves</li>
-      <li>Auto-retries on the next sync cycle</li>
-      <li>Other records are not blocked — each syncs independently</li>
-    </ol></div></div>
+    <h2>Custom Frappe Apps</h2>
+    <p>A Frappe App is a Python package that extends Frappe with new DocTypes, scripts, configurations, and fixtures. All customizations in production should live in a custom app — not in Frappe core.</p>
+    <div class="code-block"><span class="cm"># Create a new Frappe app</span>
+bench new-app myapp
 
-    <div class="quiz"><h3>✦ Knowledge Check — Chapter 5</h3>
-      <div class="quiz-q"><p>A field worker fills 20 forms in a village with no internet. That evening she gets connectivity. What happens?</p>
-        <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The 20 forms are lost — they should have been saved online</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>She must manually submit each form one by one</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>All 20 forms automatically upload to the server in batch</div>
-        </div>
-        <div class="quiz-fb ok">✓ Correct. All Dirty records sync automatically when internet returns. No manual action needed.</div>
-        <div class="quiz-fb bad">✗ Offline records (marked Dirty) sync automatically in batch when internet returns.</div>
-      </div>
-    </div>
+<span class="cm"># App directory structure</span>
+myapp/
+  myapp/
+    __init__.py
+    hooks.py          <span class="cm"># Event hooks and configuration</span>
+    modules.txt       <span class="cm"># List of modules</span>
+    public/           <span class="cm"># Static files (JS, CSS)</span>
+    templates/        <span class="cm"># Jinja templates</span>
+    module_name/
+      doctype/
+        my_doctype/   <span class="cm"># DocType definition files</span>
+      report/         <span class="cm"># Custom reports</span>
+      page/           <span class="cm"># Custom pages</span>
 
-    <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-    <div class="page-nav">
-      <a href="ch4.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">The Web Side</div></div></a>
-      <a href="ch6.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Data Flow & Sync</div></div></a>
+<span class="cm"># Install on a site</span>
+bench --site mysite.local install-app myapp</div>
+
+    <div class="quiz">
+      <div class="quiz-header">
+        <span class="qh-icon">✦</span>
+        <div><h3>Chapter Test</h3><p>Answer all questions, then submit to see your score.</p></div>
+        <div class="quiz-score"><div class="qs-val">0 / 4</div><div class="qs-lbl">Score</div></div>
+      </div><div class="quiz-q"><div class="quiz-q-num">Question 1 of 4</div><p>A validation rule says 'End date must be after start date'. Where should this be implemented in Frappe?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>In the form's depends_on expression</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>In a Frappe Server Script (Python) — it runs on every save</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>In a Frappe Client Script (JavaScript) — it runs in the browser</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>In the DocType's field definition</div></div><div class="quiz-fb ok">✓ Correct! Cross-field validation should be in a Server Script — it runs on every save regardless of how data arrives.</div><div class="quiz-fb bad">✗ Cross-field validation belongs in a Server Script. Client Scripts only run in the browser — they don't protect against API submissions.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 2 of 4</div><p>What is the key difference between a Web Client Script and a Mobile Form Handler?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>Client Scripts run faster than Mobile Handlers</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Client Scripts run in the browser (Desk only); Mobile Handlers run in the Flutter app (mobile only)</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>They are the same thing written in different languages but do the same job</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>Mobile Handlers can access the server; Client Scripts cannot</div></div><div class="quiz-fb ok">✓ Correct! Client Scripts are browser-only (Frappe Desk). Mobile Handlers are app-only (Flutter). Both provide real-time behavior on their platform.</div><div class="quiz-fb bad">✗ Web Client Script = browser/Desk only. Mobile Form Handler = Flutter app only. Different platforms, similar purpose.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 3 of 4</div><p>What does the Frappe REST API endpoint GET /api/resource/Household Survey return?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>The DocType definition (field structure)</div><div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>A list of Household Survey records</div><div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>The server configuration settings</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>A count of records only</div></div><div class="quiz-fb ok">✓ Correct! /api/resource/DocType lists records of that DocType, with optional filters and field selection.</div><div class="quiz-fb bad">✗ /api/resource/DocType returns a list of records. Add ?filters= and ?fields= to refine the query.</div></div><div class="quiz-q"><div class="quiz-q-num">Question 4 of 4</div><p>What is the purpose of Frappe Hooks (hooks.py)?</p><div class="quiz-opts"><div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>To style the Frappe Desk interface</div><div class="quiz-opt" data-correct="false"><span class="opt-l">B</span>To define keyboard shortcuts in the browser</div><div class="quiz-opt" data-correct="true"><span class="opt-l">C</span>To attach Python functions to Frappe events without modifying core code</div><div class="quiz-opt" data-correct="false"><span class="opt-l">D</span>To configure database backup schedules</div></div><div class="quiz-fb ok">✓ Correct! Hooks attach your functions to Frappe events (before_save, on_submit, etc.) in a non-intrusive way.</div><div class="quiz-fb bad">✗ hooks.py connects your app's functions to Frappe's event system — the correct way to extend Frappe without modifying core.</div></div><button class="quiz-submit" disabled>Submit Answers</button>
+      <div class="quiz-result"><div class="qr-score">0 / 0</div><div class="qr-msg"></div></div>
     </div>
+    <button class="done-btn" id="done-btn">Mark Chapter Complete ✓</button>
+    <div class="page-nav"><a href="ch4.html" class="pn-btn"><span class="pn-arr">←</span><div><div class="pn-lbl">Previous</div><div class="pn-title">Frappe Desk</div></div></a><a href="ch6.html" class="pn-btn next"><span class="pn-arr">→</span><div><div class="pn-lbl">Next</div><div class="pn-title">Mobile App & SDK</div></div></a></div>
   </div>
 </main>
 <script src="assets/app.js"></script>
-<script>initPage('ch5');</script>
-</body>
-</html>
+<script>init('ch5');</script>
+</body></html>
