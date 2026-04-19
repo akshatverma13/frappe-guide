@@ -1,57 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Form & Module Reference · Frappe Guide</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form & Module Reference · Frappe Learning Guide</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-
-<button class="mob-toggle" id="mob-toggle">☰</button>
-
-<!-- SIDEBAR -->
+<button class="mob-btn" id="mob-btn">☰</button>
 <aside class="sb" id="sidebar">
   <a href="index.html" class="sb-logo">
     <div class="sb-logo-mark">🌿</div>
     <div>
-      <div class="sb-logo-name">Frappe Guide</div>
-      <div class="sb-logo-sub">Dhwani RIS · Product Team</div>
+      <div class="sb-logo-name">Frappe Learning Guide</div>
+      <div class="sb-logo-sub">Product Team · Dhwani RIS</div>
     </div>
   </a>
-  <div class="sb-scroll" id="sb-nav"><!-- built by JS --></div>
+  <div class="sb-scroll" id="sb-nav"></div>
   <div class="sb-footer">
-    <div class="sb-progress-label">
-      <span>Progress</span>
-      <span id="sb-prog-done">0 / 7</span>
+    <div class="sb-prog-row">
+      <span class="sb-prog-label">Your Progress</span>
+      <span class="sb-prog-val" id="sb-prog-val">0 / 7</span>
     </div>
     <div class="sb-track"><div class="sb-fill" id="sb-fill" style="width:0%"></div></div>
-    <div class="sb-built">Built by Nihaan Mohammed · 2026</div>
+    <div class="sb-team">Product Team · Dhwani RIS · 2026</div>
   </div>
 </aside>
-
-<!-- MAIN -->
 <main class="main">
   <div class="topbar">
-    <span class="topbar-crumb">
-      <a href="index.html">Frappe Guide</a>
-      <span class="topbar-sep"> › </span>
-    </span>
-    <span class="topbar-current">Chapter 7 · Form & Module Reference</span>
-    <div class="topbar-right">
-      <span class="topbar-progress" id="top-prog">0 / 7 chapters</span>
+    <span class="tb-crumb"><a href="index.html">Frappe Guide</a><span class="tb-sep"> / </span></span>
+    <span class="tb-cur">Chapter 7</span>
+    <div class="tb-right">
+      <span class="tb-badge" id="top-prog">Progress: <span>0 / 7</span></span>
     </div>
   </div>
-
-  <div class="page-wrap">
+  <div class="page">
 
     <div class="hero">
-      <div class="hero-eyebrow">📋 Chapter 7 of 7 · SNF Project</div>
-      <h1>Form & Module<br><em>Reference</em></h1>
-      <p>The SNF project catalog. All 76 DocTypes, 3 programs, module map, geography hierarchy, and the dependency order you must follow.</p>
-      <div class="hero-tags"><span class="hero-tag">SNF</span><span class="hero-tag">76 DocTypes</span><span class="hero-tag">Module Map</span><span class="hero-tag">Geography</span><span class="hero-tag">Dependencies</span></div>
+      <div class="hero-pill">📋 Chapter 7 of 7 · SNF Project</div>
+      <h1>Form &amp; Module <span>Reference</span></h1>
+      <p>The SNF project catalog. All 76 DocTypes, module map, geography hierarchy, and the dependency order you must follow.</p>
+      <div class="hero-tags"><span class="hero-tag">SNF Project</span><span class="hero-tag">76 DocTypes</span><span class="hero-tag">Module Map</span><span class="hero-tag">Geography</span></div>
     </div>
-
-    <div class="callout info"><span class="callout-icon">ℹ️</span><div><strong>Project-specific chapter</strong><p>Chapters 1–6 explain the platform in general. This chapter catalogs the actual SNF (Shiksha Navnirmiti Foundation) project forms.</p></div></div>
+    <div class="callout info"><span class="callout-icon">ℹ️</span><div class="callout-body"><strong>Project-specific chapter</strong><p>Chapters 1–6 explain the platform in general. This chapter catalogs the actual forms and modules in the SNF (Shiksha Navnirmiti Foundation) project.</p></div></div>
 
     <div class="stats">
       <div class="stat"><div class="stat-v">76</div><div class="stat-l">Total DocTypes</div></div>
@@ -62,97 +53,86 @@
 
     <h2>The Three Programs</h2>
     <div class="cards three">
-      <div class="card"><div class="card-head"><div class="card-ico ci-blue">📚</div><div class="card-title">Shiksha Plus</div></div><p>Community learning centers. Volunteer-led education. 6 main forms + 8 child tables.</p></div>
+      <div class="card"><div class="card-head"><div class="card-ico ci-indigo">📚</div><div class="card-title">Shiksha Plus</div></div><p>Community learning centers. Volunteer-led education. 6 main forms + 8 child tables.</p></div>
       <div class="card"><div class="card-head"><div class="card-ico ci-teal">🏫</div><div class="card-title">Shiksha Kiran</div></div><p>School-based education support and monitoring. 3 forms + 4 child tables.</p></div>
       <div class="card"><div class="card-head"><div class="card-ico ci-green">📝</div><div class="card-title">Shiksha Elementary</div></div><p>Elementary school monitoring with detailed checklists. 4 forms + 23 child tables.</p></div>
     </div>
 
     <h2>Module Map</h2>
-    <div class="tbl">
-      <table>
-        <thead><tr><th>Module</th><th>Contents</th><th>Purpose</th></tr></thead>
-        <tbody>
-          <tr><td><span class="badge ba-blue">Geo Master</span></td><td>6 DocTypes</td><td>State, District, Block, Gram Panchayat, Village, Hamlet</td></tr>
-          <tr><td><span class="badge ba-gray">Answer Options</span></td><td>30+ DocTypes</td><td>All dropdown option masters used across all forms</td></tr>
-          <tr><td><span class="badge ba-teal">SNF Core</span></td><td>4 forms</td><td>Employee Master, Household Survey, Assessment, BME</td></tr>
-          <tr><td><span class="badge ba-green">Shiksha Plus</span></td><td>6 forms + 8 child tables</td><td>Volunteer, DVR, MIS, Attendance, Enrolment</td></tr>
-          <tr><td><span class="badge ba-amber">Shiksha Kiran</span></td><td>3 forms + 4 child tables</td><td>DVR, MIS, Baseline Evaluation</td></tr>
-          <tr><td><span class="badge ba-red">Shiksha Elementary</span></td><td>4 forms + 23 child tables</td><td>DVR, Student Attendance, Headcount, Student Profiling</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Module</th><th>Contents</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-indigo">Geo Master</span></td><td>6 DocTypes</td><td>State, District, Block, Gram Panchayat, Village, Hamlet</td></tr>
+        <tr><td><span class="badge ba-gray">Answer Options</span></td><td>30+ DocTypes</td><td>All dropdown option masters used across all forms</td></tr>
+        <tr><td><span class="badge ba-teal">SNF Core</span></td><td>4 forms</td><td>Employee Master, Household Survey, Assessment, BME</td></tr>
+        <tr><td><span class="badge ba-green">Shiksha Plus</span></td><td>6 forms + 8 child tables</td><td>Volunteer, DVR, MIS, Attendance, Enrolment</td></tr>
+        <tr><td><span class="badge ba-amber">Shiksha Kiran</span></td><td>3 forms + 4 child tables</td><td>DVR, MIS, Baseline Evaluation</td></tr>
+        <tr><td><span class="badge ba-red">Shiksha Elementary</span></td><td>4 forms + 23 child tables</td><td>DVR, Student Attendance, Headcount, Student Profiling</td></tr>
+      </tbody>
+    </table></div>
 
     <h2>Geography Hierarchy</h2>
-    <p>The foundation of everything. Every form starts with geography. Each level references its parent.</p>
-    <div style="display:flex;flex-direction:column;gap:2px;margin:16px 0">
-      <div style="background:#0C0F14;color:white;padding:9px 16px;border-radius:8px 8px 0 0;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">🌍 <strong>State</strong> <span style="color:#64748B;font-weight:400;font-size:12px">e.g., Maharashtra</span></div>
-      <div style="background:#111827;color:white;padding:9px 16px 9px 36px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">📍 <strong>District</strong> <span style="color:#64748B;font-weight:400;font-size:12px">e.g., Pune</span></div>
-      <div style="background:#0D4F6E;color:white;padding:9px 16px 9px 52px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">🏘️ <strong>Block</strong> <span style="color:#7DD3FC;font-weight:400;font-size:12px">e.g., Haveli</span></div>
-      <div style="background:#0E6B5E;color:white;padding:9px 16px 9px 68px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">🏛️ <strong>Gram Panchayat</strong></div>
-      <div style="background:#065F46;color:white;padding:9px 16px 9px 84px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">🌳 <strong>Village</strong></div>
-      <div style="background:#059669;color:white;padding:9px 16px 9px 100px;border-radius:0 0 8px 8px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px">🏠 <strong>Hamlet</strong> <span style="color:#A7F3D0;font-weight:400;font-size:12px">Also serves as batch identifier for learner grouping</span></div>
+    <p>The foundation of all data collection. Every form starts with geography. Each level references its parent, and selecting one level automatically narrows the next.</p>
+    <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin:14px 0;box-shadow:var(--sh)">
+      <div style="background:#F8FAFF;border-bottom:1px solid var(--border);padding:10px 16px 10px 20px;font-size:13px;font-weight:600;color:#3730A3;display:flex;align-items:center;gap:10px">🌍 State <span style="color:var(--light);font-weight:400;font-size:12px">e.g., Maharashtra</span></div>
+      <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px 10px 36px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">📍 District <span style="color:var(--light);font-weight:400;font-size:12px">e.g., Pune</span></div>
+      <div style="background:var(--teal-light);border-bottom:1px solid var(--border);padding:10px 16px 10px 52px;font-size:13px;font-weight:500;color:#0F766E;display:flex;align-items:center;gap:10px">🏘️ Block <span style="color:#99F6E4;font-weight:400;font-size:12px">e.g., Haveli</span></div>
+      <div style="background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px 10px 68px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">🏛️ Gram Panchayat</div>
+      <div style="background:var(--green-light);border-bottom:1px solid var(--border);padding:10px 16px 10px 84px;font-size:13px;font-weight:500;color:#065F46;display:flex;align-items:center;gap:10px">🌳 Village</div>
+      <div style="background:var(--bg);padding:10px 16px 10px 100px;font-size:13px;font-weight:500;color:var(--text-2);display:flex;align-items:center;gap:10px">🏠 Hamlet <span style="color:var(--light);font-weight:400;font-size:12px">Also serves as batch identifier for learner grouping</span></div>
     </div>
 
     <h2>Dependency Order — What to Create First</h2>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div><strong>Follow this order always</strong><p>For initial setup, data import, testing, and mobile sync. Transaction forms reference master data — they fail if the reference doesn't exist yet.</p></div></div>
-    <div class="tbl">
-      <table>
-        <thead><tr><th>Level</th><th>What It Contains</th><th>Create When</th></tr></thead>
-        <tbody>
-          <tr><td><span class="badge ba-blue">Level 0</span></td><td>All 6 Geography DocTypes + 30+ Option Masters</td><td>First — no dependencies</td></tr>
-          <tr><td><span class="badge ba-teal">Level 1</span></td><td>Employee Master, Household Survey, Volunteers, Enrolment</td><td>After Level 0</td></tr>
-          <tr><td><span class="badge ba-green">Level 2</span></td><td>All DVRs, MIS forms, Attendance, Headcount, Student Profiling</td><td>After Level 1</td></tr>
-          <tr><td><span class="badge ba-amber">Level 3</span></td><td>Assessment Form, Baseline-Midline-Endline</td><td>After Level 2</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="callout warn"><span class="callout-icon">⚠️</span><div class="callout-body"><strong>Always follow this sequence</strong><p>For initial system setup, data imports, testing, and mobile sync. Transaction forms reference master data — they will fail if the referenced record doesn't exist yet.</p></div></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Level</th><th>Contains</th><th>Create When</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-indigo">Level 0</span></td><td>All 6 Geography DocTypes + 30+ Option Masters</td><td>First — no dependencies on anything</td></tr>
+        <tr><td><span class="badge ba-teal">Level 1</span></td><td>Employee Master, Household Survey, Volunteers, Enrolment</td><td>After Level 0 is complete</td></tr>
+        <tr><td><span class="badge ba-green">Level 2</span></td><td>All DVRs, MIS forms, Attendance, Headcount, Student Profiling</td><td>After Level 1 is complete</td></tr>
+        <tr><td><span class="badge ba-amber">Level 3</span></td><td>Assessment Form, Baseline-Midline-Endline</td><td>After Level 2 is complete</td></tr>
+      </tbody>
+    </table></div>
 
-    <h2>Form Complexity</h2>
-    <div class="tbl">
-      <table>
-        <thead><tr><th>Complexity</th><th>Form</th><th>Why</th></tr></thead>
-        <tbody>
-          <tr><td><span class="badge ba-green">Simplest</span></td><td>Option Masters</td><td>Just a name field — dropdown choice records</td></tr>
-          <tr><td><span class="badge ba-green">Simple</span></td><td>Geography Masters</td><td>Name + parent reference</td></tr>
-          <tr><td><span class="badge ba-teal">Moderate</span></td><td>Employee Master, Volunteer</td><td>Flat form with geography links and auto-fill</td></tr>
-          <tr><td><span class="badge ba-amber">Complex</span></td><td>Household Survey</td><td>Child table + computed case category fields</td></tr>
-          <tr><td><span class="badge ba-red">Very Complex</span></td><td>Shiksha Plus DVR</td><td>Branching — 4 different section sets per purpose, 6 child tables</td></tr>
-          <tr><td><span class="badge ba-red">Most Complex</span></td><td>Shiksha Elementary DVR</td><td>23 child tables, extensive conditional logic</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h2>Form Complexity Ranking</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Complexity</th><th>Form</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge ba-green">Simplest</span></td><td>Option Masters</td><td>Just a name field — dropdown choice records</td></tr>
+        <tr><td><span class="badge ba-green">Simple</span></td><td>Geography Masters</td><td>Name + parent reference link</td></tr>
+        <tr><td><span class="badge ba-teal">Moderate</span></td><td>Employee Master, Volunteer</td><td>Flat form with geography links and auto-fill</td></tr>
+        <tr><td><span class="badge ba-amber">Complex</span></td><td>Household Survey</td><td>Child table + computed case category calculations</td></tr>
+        <tr><td><span class="badge ba-red">Very Complex</span></td><td>Shiksha Plus DVR</td><td>Branching form — 4 different section sets, 6 child tables</td></tr>
+        <tr><td><span class="badge ba-red">Most Complex</span></td><td>Shiksha Elementary DVR</td><td>23 child tables, extensive conditional logic</td></tr>
+      </tbody>
+    </table></div>
 
-    <div class="quiz">
-      <h3>🧠 Chapter 7 — Final Check</h3>
-      <div class="quiz-q">
-        <p>You are setting up the SNF system from scratch. What must you create first?</p>
+    <div class="quiz"><h3>✦ Knowledge Check — Chapter 7</h3>
+      <div class="quiz-q"><p>You are setting up the SNF system from scratch. What must you create first?</p>
         <div class="quiz-opts">
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span> DVRs first — they are the most important forms</div>
-          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span> Geography masters + option masters first, then employees, then DVRs</div>
-          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span> Alphabetical order — it does not matter</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">A</span>DVRs first — they are the most used forms</div>
+          <div class="quiz-opt" data-correct="true"><span class="opt-l">B</span>Geography masters and option masters first, then employees, then DVRs</div>
+          <div class="quiz-opt" data-correct="false"><span class="opt-l">C</span>Alphabetical order — it does not matter</div>
         </div>
-        <div class="quiz-fb ok">✅ Correct! Level 0 (geography + options) → Level 1 (employees/volunteers) → Level 2 (DVRs) → Level 3 (assessments).</div>
-        <div class="quiz-fb bad">❌ Follow the dependency order: geography + options first, then people masters, then transaction forms.</div>
+        <div class="quiz-fb ok">✓ Correct. Level 0 (geography + options) → Level 1 (employees) → Level 2 (DVRs) → Level 3 (assessments).</div>
+        <div class="quiz-fb bad">✗ Always follow dependency order: geography + options first, then people masters, then transaction forms.</div>
       </div>
     </div>
 
-    <div style="background:linear-gradient(135deg,#0C0F14,#111827);border-radius:14px;padding:36px;color:white;margin-top:40px;text-align:center">
-      <div style="font-size:36px;margin-bottom:12px">🎉</div>
-      <div style="font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;margin-bottom:8px">All 7 chapters complete.</div>
-      <div style="color:#64748B;margin-bottom:24px;font-size:14px">You now understand the full Frappe platform — from DocTypes to sync to the SNF module map.</div>
-      <a href="index.html" style="background:var(--teal);color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:500;font-size:13.5px;display:inline-block">← Back to Home</a>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:36px;text-align:center;margin-top:40px;box-shadow:var(--sh)">
+      <div style="font-size:32px;margin-bottom:12px">✦</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--text);margin-bottom:8px">All 7 chapters complete.</div>
+      <div style="color:var(--muted);margin-bottom:24px;font-size:14px;max-width:400px;margin-left:auto;margin-right:auto">You now understand the full Frappe platform — from DocTypes and sync to the complete SNF module structure.</div>
+      <a href="index.html" style="background:var(--indigo);color:white;padding:10px 24px;border-radius:var(--r-sm);text-decoration:none;font-weight:500;font-size:13.5px;display:inline-block">← Back to Overview</a>
     </div>
 
-
     <button class="complete-btn" id="complete-btn">Mark Complete ✓</button>
-
     <div class="page-nav">
-      <a href="ch6.html" class="pnav-btn"><span class="arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Data Flow & Sync</div></div></a>
-      <a href="glossary.html" class="pnav-btn next"><span class="arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Glossary</div></div></a>
+      <a href="ch6.html" class="pnav-btn"><span class="pnav-arr">←</span><div><div class="pnav-lbl">Previous</div><div class="pnav-title">Data Flow & Sync</div></div></a>
+      <a href="glossary.html" class="pnav-btn next"><span class="pnav-arr">→</span><div><div class="pnav-lbl">Next</div><div class="pnav-title">Glossary</div></div></a>
     </div>
   </div>
 </main>
-
 <script src="assets/app.js"></script>
 <script>initPage('ch7');</script>
 </body>
